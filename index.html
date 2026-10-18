@@ -1,0 +1,340 @@
+
+<!DOCTYPE html>
+<html lang="he" dir="rtl" translate="no">
+<head>
+  <meta charset="UTF-8">
+  <meta name="google" content="notranslate">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>חישוב כמויות בנייה | מערכת מבוססת AI</title>
+  <style>
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f5f8fc;
+      color: #1b3854;
+      line-height: 1.7;
+    }
+    .container {
+      width: min(920px, 92%);
+      margin: auto;
+    }
+    header {
+      background: #fff;
+      border-bottom: 1px solid #dce5ef;
+      padding: 18px 0;
+      font-weight: bold;
+      color: #203f61;
+    }
+    .hero {
+      text-align: center;
+      padding: 80px 20px;
+      background: linear-gradient(135deg,#e5effa,#f8fbff);
+    }
+    .tag {
+      display: inline-block;
+      padding: 6px 17px;
+      background: #dbe9f7;
+      color: #376c98;
+      border-radius: 30px;
+      font-size: 13px;
+      font-weight: bold;
+    }
+    h1 {
+      max-width: 680px;
+      font-size: clamp(30px, 5vw, 46px);
+      line-height: 1.3;
+      margin: 21px auto;
+    }
+    .hero p {
+      max-width: 610px;
+      margin: 0 auto 28px;
+      color: #627d96;
+      font-size: 17px;
+    }
+    button {
+      background: #23476d;
+      color: white;
+      border: none;
+      border-radius: 9px;
+      padding: 14px 30px;
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
+      font-family: inherit;
+    }
+    button:hover { background: #356795; }
+    button:disabled { opacity: .6; cursor: wait; }
+    section { padding: 60px 0; }
+    h2 {
+      text-align: center;
+      font-size: 28px;
+      margin: 0 0 28px;
+    }
+    .problems {
+      display: grid;
+      gap: 12px;
+      max-width: 680px;
+      margin: auto;
+    }
+    .problem {
+      background: white;
+      padding: 16px 20px;
+      border: 1px solid #e0e8f1;
+      border-radius: 10px;
+    }
+    .problem span {
+      color: #4380b0;
+      font-weight: bold;
+      margin-left: 10px;
+    }
+    .how { background: #fff; }
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    .step {
+      text-align: center;
+      padding: 25px 18px;
+      background: #f5f8fc;
+      border: 1px solid #e0e8f1;
+      border-radius: 12px;
+    }
+    .num {
+      background: #23476d;
+      color: white;
+      width: 43px;
+      height: 43px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      margin: 0 auto 15px;
+      font-weight: bold;
+    }
+    h3 { margin: 0 0 8px; }
+    .step p {
+      margin: 0;
+      color: #657d93;
+      font-size: 14px;
+    }
+    .form-card {
+      max-width: 490px;
+      margin: auto;
+      background: white;
+      padding: 35px;
+      border: 1px solid #e0e8f1;
+      border-radius: 15px;
+      box-shadow: 0 9px 30px #24476d12;
+    }
+    .form-card p {
+      text-align: center;
+      color: #657d93;
+    }
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 6px;
+    }
+    input {
+      display: block;
+      width: 100%;
+      border: 1px solid #cdd9e5;
+      border-radius: 8px;
+      padding: 13px;
+      margin-bottom: 18px;
+      font: inherit;
+    }
+    input:focus {
+      outline: 2px solid #83afd2;
+    }
+    .send { width: 100%; }
+    .error {
+      color: #b02e3b !important;
+      font-size: 13px;
+    }
+    .thanks { text-align: center; }
+    .thanks strong {
+      display: block;
+      color: #278065;
+      font-size: 28px;
+    }
+    [hidden] { display: none !important; }
+    footer {
+      padding: 23px;
+      text-align: center;
+      color: #8295a7;
+      font-size: 12px;
+      border-top: 1px solid #e0e8f1;
+    }
+    @media(max-width:650px) {
+      .hero { padding: 60px 16px; }
+      .hero p { font-size: 15px; }
+      section { padding: 45px 0; }
+      h2 { font-size: 24px; }
+      .steps { grid-template-columns: 1fr; }
+      .form-card { padding: 25px 20px; }
+      button { width: 100%; }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="container">
+      ▦ חישוב כמויות בנייה
+    </div>
+  </header>
+
+  <main>
+    <div class="hero">
+      <span class="tag">חישוב כמויות באמצעות AI</span>
+      <h1>פחות חישובים ידניים.<br>יותר זמן לפרויקטים שלך.</h1>
+      <p>
+        מערכת למהנדסי בניין וחשבי כמויות,
+        המסייעת להפיק כתב כמויות מתוכניות PDF
+        באמצעות AI ובקרה מקצועית.
+      </p>
+      <button type="button" id="firstCTA">
+        אני רוצה לשמוע עוד ←
+      </button>
+    </div>
+
+    <section>
+      <div class="container">
+        <h2>נשמע מוכר?</h2>
+        <div class="problems">
+          <div class="problem">
+            <span>✕</span> שעות של קריאת תוכניות וחישובים ידניים.
+          </div>
+          <div class="problem">
+            <span>✕</span> טעויות הקלדה וספירה כפולה של אלמנטים.
+          </div>
+          <div class="problem">
+            <span>✕</span> כל שינוי בתוכנית מחייב חישוב מחדש.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="how">
+      <div class="container">
+        <h2>איך זה עובד?</h2>
+        <div class="steps">
+          <div class="step">
+            <div class="num">1</div>
+            <h3>מעלים תוכנית</h3>
+            <p>מעלים PDF ובוחרים בטון, ברזל או בלוקים.</p>
+          </div>
+          <div class="step">
+            <div class="num">2</div>
+            <h3>מנתחים ובודקים</h3>
+            <p>AI מחלץ נתונים, והמשתמש בודק ומאשר.</p>
+          </div>
+          <div class="step">
+            <div class="num">3</div>
+            <h3>מפיקים כתב כמויות</h3>
+            <p>מחשבים כמויות ומייצאים ל־Excel.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container">
+        <div class="form-card">
+          <div id="formArea">
+            <h2>רוצה לשמוע עוד?</h2>
+            <p>השאירו פרטים וניצור קשר לבדיקת התאמה.</p>
+
+            <form id="leadForm">
+              <label for="fullName">שם</label>
+              <input type="text" id="fullName"
+                name="name" placeholder="השם שלך"
+                autocomplete="name" required>
+
+              <label for="email">כתובת מייל</label>
+              <input type="email" id="email"
+                name="email" placeholder="example@gmail.com"
+                autocomplete="email" dir="ltr" required>
+
+              <button class="send" id="sendButton" type="submit">
+                שליחת פרטים ←
+              </button>
+
+              <p id="error" class="error" role="alert" hidden></p>
+            </form>
+          </div>
+
+          <div id="thanks" class="thanks" role="status" hidden>
+            <strong>✓</strong>
+            <h2>תודה על פנייתך</h2>
+            <p>
+              הפרטים התקבלו.
+              ניצור איתך קשר לתיאום שיחת היכרות.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>חישוב כמויות בנייה | מערכת מבוססת AI</footer>
+
+  <script>
+    // כאן יש להכניס בהמשך כתובת של שירות לקבלת פניות.
+    const ENDPOINT = "";
+
+    document.getElementById("firstCTA")
+      .addEventListener("click", () => {
+        document.getElementById("contact")
+          .scrollIntoView({ behavior: "smooth" });
+      });
+
+    const form = document.getElementById("leadForm");
+    const button = document.getElementById("sendButton");
+    const error = document.getElementById("error");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      error.hidden = true;
+
+      if (!form.reportValidity()) return;
+
+      if (!ENDPOINT) {
+        error.textContent =
+          "הטופס עדיין אינו מחובר לקבלת פניות. נסו שוב לאחר הפעלת השירות.";
+        error.hidden = false;
+        return;
+      }
+
+      button.disabled = true;
+      button.textContent = "שולחים...";
+
+      try {
+        const response = await fetch(ENDPOINT, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            name: document.getElementById("fullName").value.trim(),
+            email: document.getElementById("email").value.trim()
+          })
+        });
+
+        if (!response.ok) throw new Error("Request failed");
+
+        document.getElementById("formArea").hidden = true;
+        document.getElementById("thanks").hidden = false;
+      } catch (err) {
+        error.textContent =
+          "השליחה נכשלה. בדקו את החיבור ונסו שוב מאוחר יותר.";
+        error.hidden = false;
+      } finally {
+        button.disabled = false;
+        button.textContent = "שליחת פרטים ←";
+      }
+    });
+  </script>
+</body>
+</html>
