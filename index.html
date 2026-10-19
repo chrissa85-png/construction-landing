@@ -439,8 +439,9 @@ footer {
 </footer>
 
 <script>
-  // יש להכניס כאן את כתובת ה-Webhook מ-Make
-  const MAKE_WEBHOOK_URL = "";
+  // Webhook של Make - הכתובת כבר הוכנסה
+  const MAKE_WEBHOOK_URL =
+    "https://hook.eu1.make.com/exy2ts1g9lcvkvz498t4x4fq38olw33q";
 
   const heroCTA = document.getElementById("heroCTA");
   const form = document.getElementById("leadForm");
@@ -473,13 +474,6 @@ footer {
       return;
     }
 
-    if (!MAKE_WEBHOOK_URL) {
-      showError(
-        "לא ניתן לשלוח את הפנייה כרגע. נסו שוב מאוחר יותר."
-      );
-      return;
-    }
-
     sendButton.disabled = true;
     sendButton.textContent = "שולחים פרטים...";
 
@@ -502,7 +496,7 @@ footer {
 
       const result = await response.json();
 
-      // הצלחה רק לאחר אישור מפורש מ-Make
+      // הצלחה רק לאחר אישור שמירה מפורש מ-Make
       if (result.success !== true) {
         throw new Error("No save confirmation");
       }
