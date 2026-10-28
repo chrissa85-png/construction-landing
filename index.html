@@ -2,558 +2,562 @@
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="google" content="notranslate">
-
-<title>PlanQuant | חישוב כמויות בנייה</title>
-<meta name="description" content="PlanQuant - מערכת לחישוב כמויות בנייה מתוכניות PDF באמצעות AI ובקרה מקצועית.">
-
-<style>
-:root {
-  --blue: #23486f;
-  --blue-dark: #183956;
-  --text: #233f58;
-  --muted: #52697f;
-  --background: #f5f8fc;
-  --border: #dce5ee;
-  --scale: 1;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-html {
-  scroll-behavior: smooth;
-  font-size: calc(16px * var(--scale));
-}
-
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  line-height: 1.7;
-  color: var(--text);
-  background: var(--background);
-}
-
-.container {
-  width: min(960px, 92%);
-  margin: auto;
-}
-
-[hidden] {
-  display: none !important;
-}
-
-button, input {
-  font: inherit;
-}
-
-button {
-  cursor: pointer;
-}
-
-button:disabled {
-  opacity: .6;
-  cursor: not-allowed;
-}
-
-:focus-visible {
-  outline: 3px solid #176fa4;
-  outline-offset: 3px;
-}
-
-.skip-link {
-  position: absolute;
-  top: -100px;
-  right: 12px;
-  padding: 10px 18px;
-  background: var(--blue);
-  color: white;
-  z-index: 1000;
-}
-
-.skip-link:focus {
-  top: 10px;
-}
-
-/* כותרת ולוגו */
-
-header {
-  background: #fff;
-  border-bottom: 1px solid var(--border);
-}
-
-.header-inner {
-  min-height: 110px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-}
-
-.logo-frame {
-  width: 265px;
-  height: 92px;
-  position: relative;
-  overflow: hidden;
-  flex-shrink: 0;
-}
-
-.logo-image {
-  position: absolute;
-  width: 500px;
-  height: 200px;
-  max-width: none;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-}
-
-/* אזור ראשי */
-
-.hero {
-  background: linear-gradient(
-    135deg, #e6f0fa, #f9fbfe
-  );
-  padding: 85px 20px 75px;
-  text-align: center;
-}
-
-.tag {
-  display: inline-block;
-  background: #dae9f8;
-  color: #356a95;
-  border-radius: 25px;
-  padding: 5px 16px;
-  font-size: .8125rem;
-  font-weight: bold;
-}
-
-h1 {
-  font-size: clamp(1.875rem, 5vw, 2.875rem);
-  line-height: 1.3;
-  color: #1b3b59;
-  margin: 20px 0;
-}
-
-.hero p {
-  max-width: 625px;
-  margin: 0 auto 27px;
-  color: var(--muted);
-  font-size: 1.0625rem;
-}
-
-.btn {
-  display: inline-block;
-  background: var(--blue);
-  border: none;
-  color: white;
-  padding: 14px 28px;
-  border-radius: 9px;
-  font-weight: bold;
-  text-align: center;
-}
-
-.btn:hover {
-  background: #376c99;
-}
-
-/* תוכן */
-
-section {
-  padding: 65px 0;
-}
-
-h2 {
-  font-size: 1.6875rem;
-  color: #20415f;
-  text-align: center;
-  margin: 0 0 28px;
-}
-
-.problems {
-  list-style: none;
-  max-width: 680px;
-  margin: auto;
-  padding: 0;
-  display: grid;
-  gap: 13px;
-}
-
-.problem {
-  padding: 17px 20px;
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  background: #fff;
-}
-
-.problem span {
-  color: #5185ae;
-  font-weight: bold;
-  margin-left: 10px;
-}
-
-/* שלבי עבודה */
-
-.how {
-  background: #fff;
-}
-
-.steps {
-  list-style: none;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 17px;
-  margin: 0;
-  padding: 0;
-}
-
-.step {
-  background: var(--background);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 28px 18px;
-  text-align: center;
-}
-
-.number {
-  display: grid;
-  place-items: center;
-  width: 43px;
-  height: 43px;
-  margin: 0 auto 15px;
-  background: var(--blue);
-  color: white;
-  border-radius: 50%;
-  font-weight: bold;
-}
-
-.step h3 {
-  font-size: 1.0625rem;
-  margin: 0 0 8px;
-}
-
-.step p {
-  font-size: .875rem;
-  color: var(--muted);
-  margin: 0;
-}
-
-/* טופס יצירת קשר */
-
-#contact {
-  scroll-margin-top: 20px;
-}
-
-.form-card {
-  max-width: 500px;
-  margin: auto;
-  padding: 36px;
-  background: #fff;
-  border: 1px solid var(--border);
-  border-radius: 15px;
-  box-shadow: 0 8px 30px #24476d10;
-}
-
-.form-card h2 {
-  margin-bottom: 8px;
-}
-
-.form-description {
-  text-align: center;
-  color: var(--muted);
-  font-size: .875rem;
-  margin-bottom: 28px;
-}
-
-label {
-  display: block;
-  font-size: .875rem;
-  font-weight: bold;
-  margin-bottom: 6px;
-}
-
-input {
-  display: block;
-  width: 100%;
-  margin-bottom: 19px;
-  padding: 13px;
-  border: 1px solid #6c8195;
-  border-radius: 8px;
-  color: var(--text);
-  background: #fff;
-}
-
-input::placeholder {
-  color: #52697f;
-  opacity: 1;
-}
-
-input[aria-invalid="true"] {
-  border-color: #ac2b38;
-}
-
-.send-btn {
-  width: 100%;
-}
-
-.privacy-note {
-  font-size: .75rem;
-  color: var(--muted);
-  text-align: center;
-  margin: 13px 0 0;
-}
-
-.error {
-  color: #ac2b38;
-  font-size: .8125rem;
-  margin-top: 12px;
-}
-
-.success {
-  text-align: center;
-  padding: 24px 0;
-}
-
-.success-icon {
-  font-size: 2.2rem;
-  color: #278067;
-}
-
-.success p {
-  color: var(--muted);
-}
-
-/* תחתית */
-
-footer {
-  border-top: 1px solid var(--border);
-  padding: 23px 80px;
-  text-align: center;
-  font-size: .75rem;
-  color: var(--muted);
-}
-
-.footer-accessibility-link {
-  border: none;
-  background: transparent;
-  color: var(--blue);
-  text-decoration: underline;
-  padding: 8px;
-  margin-top: 8px;
-  font-weight: bold;
-}
-
-/* נגישות */
-
-.accessibility-button {
-  position: fixed;
-  bottom: 20px;
-  left: 20px;
-  z-index: 100;
-  min-width: 64px;
-  min-height: 64px;
-  border: 2px solid white;
-  border-radius: 14px;
-  background: var(--blue);
-  color: white;
-  box-shadow: 0 4px 16px #0003;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.accessibility-button svg {
-  width: 28px;
-  height: 28px;
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 2;
-}
-
-.accessibility-button span {
-  font-size: .6875rem;
-  font-weight: bold;
-}
-
-.a11y-dialog {
-  width: min(620px, calc(100% - 28px));
-  max-height: 88vh;
-  margin: auto;
-  padding: 0;
-  border: 1px solid #8399ad;
-  border-radius: 15px;
-  background: #fff;
-  color: var(--text);
-  overflow: auto;
-}
-
-.a11y-dialog::backdrop {
-  background: rgba(13, 31, 48, .65);
-}
-
-.dialog-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 12px;
-  padding: 16px 22px;
-  background: var(--background);
-  border-bottom: 1px solid var(--border);
-}
-
-.dialog-header h2 {
-  margin: 0;
-  text-align: right;
-  font-size: 1.375rem;
-}
-
-.dialog-body {
-  padding: 22px;
-}
-
-.dialog-close,
-.a11y-control {
-  background: #f5f8fc;
-  color: var(--blue);
-  border: 1px solid #6c8195;
-  border-radius: 8px;
-  padding: 10px 14px;
-  min-height: 44px;
-}
-
-.a11y-controls {
-  display: grid;
-  gap: 12px;
-}
-
-.a11y-control[aria-pressed="true"] {
-  background: var(--blue);
-  color: #fff;
-}
-
-.a11y-control-group {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 10px;
-}
-
-.a11y-status {
-  min-height: 1.5em;
-  color: var(--muted);
-}
-
-html.a11y-contrast body,
-html.a11y-contrast .hero,
-html.a11y-contrast .how,
-html.a11y-contrast .step,
-html.a11y-contrast .problem,
-html.a11y-contrast .form-card {
-  background: white;
-  background-image: none;
-  color: #111;
-}
-
-html.a11y-contrast h1,
-html.a11y-contrast h2,
-html.a11y-contrast h3,
-html.a11y-contrast p {
-  color: #111;
-}
-
-html.a11y-contrast .btn {
-  background: #111;
-  color: #fff;
-}
-
-html.a11y-font body {
-  font-family: Tahoma, Arial, sans-serif;
-}
-
-html.a11y-links a {
-  text-decoration: underline !important;
-  text-decoration-thickness: 3px !important;
-}
-
-html.a11y-spacing p,
-html.a11y-spacing li,
-html.a11y-spacing h1,
-html.a11y-spacing h2 {
-  letter-spacing: .1em;
-  word-spacing: .15em;
-  line-height: 1.9;
-}
-
-html.a11y-motion *,
-html.a11y-motion *::before,
-html.a11y-motion *::after {
-  scroll-behavior: auto !important;
-  animation: none !important;
-  transition: none !important;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-}
-
-@media (max-width: 700px) {
-  .header-inner {
-    min-height: 95px;
-  }
-
-  .logo-frame {
-    width: 215px;
-    height: 78px;
-  }
-
-  .logo-image {
-    transform: translate(-50%, -50%) scale(.82);
-  }
-
-  .hero {
-    padding: 60px 18px;
-  }
-
-  .hero p {
-    font-size: .9375rem;
-  }
-
-  section {
-    padding: 46px 0;
-  }
-
-  .steps {
-    grid-template-columns: 1fr;
-  }
-
-  .step {
-    padding: 22px;
-  }
-
-  .form-card {
-    padding: 27px 20px;
-  }
-
-  .hero .btn {
-    width: 100%;
-    max-width: 320px;
-  }
-
-  footer {
-    padding: 23px 20px;
-  }
-
-  .accessibility-button {
-    left: 12px;
-    bottom: 15px;
-  }
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google" content="notranslate">
+
+  <title>PlanQuant | חישוב כמויות בנייה</title>
+  <meta name="description" content="PlanQuant - מערכת לחישוב כמויות בנייה מתוכניות PDF באמצעות AI ובקרה מקצועית.">
+
+  <style>
+    :root {
+      --blue: #23486f;
+      --blue-dark: #183956;
+      --text: #233f58;
+      --muted: #52697f;
+      --background: #f5f8fc;
+      --border: #dce5ee;
+      --scale: 1;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: calc(16px * var(--scale));
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      line-height: 1.7;
+      color: var(--text);
+      background: var(--background);
+    }
+
+    .container {
+      width: min(960px, 92%);
+      margin: auto;
+    }
+
+    [hidden] {
+      display: none !important;
+    }
+
+    button, input {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    button:disabled {
+      opacity: .6;
+      cursor: not-allowed;
+    }
+
+    :focus-visible {
+      outline: 3px solid #176fa4;
+      outline-offset: 3px;
+    }
+
+    .skip-link {
+      position: absolute;
+      top: -100px;
+      right: 12px;
+      padding: 10px 18px;
+      background: var(--blue);
+      color: white;
+      z-index: 1000;
+    }
+
+    .skip-link:focus {
+      top: 10px;
+    }
+
+    /* כותרת ולוגו מוגדל */
+
+    header {
+      background: #fff;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .header-inner {
+      min-height: 130px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+    }
+
+    .logo-frame {
+      width: 380px;
+      height: 105px;
+      position: relative;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .logo-image {
+      position: absolute;
+      width: 760px;
+      height: 304px;
+      max-width: none;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    /* אזור פתיחה */
+
+    .hero {
+      background: linear-gradient(
+        135deg, #e6f0fa, #f9fbfe
+      );
+      padding: 85px 20px 75px;
+      text-align: center;
+    }
+
+    .tag {
+      display: inline-block;
+      background: #dae9f8;
+      color: #356a95;
+      border-radius: 25px;
+      padding: 5px 16px;
+      font-size: .8125rem;
+      font-weight: bold;
+    }
+
+    h1 {
+      font-size: clamp(1.875rem, 5vw, 2.875rem);
+      line-height: 1.3;
+      color: #1b3b59;
+      margin: 20px 0;
+    }
+
+    .hero p {
+      max-width: 625px;
+      margin: 0 auto 27px;
+      color: var(--muted);
+      font-size: 1.0625rem;
+    }
+
+    .btn {
+      display: inline-block;
+      background: var(--blue);
+      border: none;
+      color: white;
+      padding: 14px 28px;
+      border-radius: 9px;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    .btn:hover {
+      background: #376c99;
+    }
+
+    /* אזורי תוכן */
+
+    section {
+      padding: 65px 0;
+    }
+
+    h2 {
+      font-size: 1.6875rem;
+      color: #20415f;
+      text-align: center;
+      margin: 0 0 28px;
+    }
+
+    .problems {
+      list-style: none;
+      max-width: 680px;
+      margin: auto;
+      padding: 0;
+      display: grid;
+      gap: 13px;
+    }
+
+    .problem {
+      padding: 17px 20px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: #fff;
+    }
+
+    .problem span {
+      color: #5185ae;
+      font-weight: bold;
+      margin-left: 10px;
+    }
+
+    /* שלבי עבודה */
+
+    .how {
+      background: #fff;
+    }
+
+    .steps {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 17px;
+      margin: 0;
+      padding: 0;
+    }
+
+    .step {
+      background: var(--background);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 28px 18px;
+      text-align: center;
+    }
+
+    .number {
+      display: grid;
+      place-items: center;
+      width: 43px;
+      height: 43px;
+      margin: 0 auto 15px;
+      background: var(--blue);
+      color: white;
+      border-radius: 50%;
+      font-weight: bold;
+    }
+
+    .step h3 {
+      font-size: 1.0625rem;
+      margin: 0 0 8px;
+    }
+
+    .step p {
+      font-size: .875rem;
+      color: var(--muted);
+      margin: 0;
+    }
+
+    /* טופס יצירת קשר */
+
+    #contact {
+      scroll-margin-top: 20px;
+    }
+
+    .form-card {
+      max-width: 500px;
+      margin: auto;
+      padding: 36px;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      box-shadow: 0 8px 30px #24476d10;
+    }
+
+    .form-card h2 {
+      margin-bottom: 8px;
+    }
+
+    .form-description {
+      text-align: center;
+      color: var(--muted);
+      font-size: .875rem;
+      margin-bottom: 28px;
+    }
+
+    label {
+      display: block;
+      font-size: .875rem;
+      font-weight: bold;
+      margin-bottom: 6px;
+    }
+
+    input {
+      display: block;
+      width: 100%;
+      margin-bottom: 19px;
+      padding: 13px;
+      border: 1px solid #6c8195;
+      border-radius: 8px;
+      color: var(--text);
+      background: #fff;
+    }
+
+    input::placeholder {
+      color: #52697f;
+      opacity: 1;
+    }
+
+    input[aria-invalid="true"] {
+      border-color: #ac2b38;
+    }
+
+    .send-btn {
+      width: 100%;
+    }
+
+    .privacy-note {
+      font-size: .75rem;
+      color: var(--muted);
+      text-align: center;
+      margin: 13px 0 0;
+    }
+
+    .error {
+      color: #ac2b38;
+      font-size: .8125rem;
+      margin-top: 12px;
+    }
+
+    .success {
+      text-align: center;
+      padding: 24px 0;
+    }
+
+    .success-icon {
+      font-size: 2.2rem;
+      color: #278067;
+    }
+
+    .success p {
+      color: var(--muted);
+    }
+
+    /* תחתית */
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 23px 80px;
+      text-align: center;
+      font-size: .75rem;
+      color: var(--muted);
+    }
+
+    .footer-accessibility-link {
+      border: none;
+      background: transparent;
+      color: var(--blue);
+      text-decoration: underline;
+      padding: 8px;
+      margin-top: 8px;
+      font-weight: bold;
+    }
+
+    /* נגישות */
+
+    .accessibility-button {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      z-index: 100;
+      min-width: 64px;
+      min-height: 64px;
+      border: 2px solid white;
+      border-radius: 14px;
+      background: var(--blue);
+      color: white;
+      box-shadow: 0 4px 16px #0003;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .accessibility-button svg {
+      width: 28px;
+      height: 28px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+    }
+
+    .accessibility-button span {
+      font-size: .6875rem;
+      font-weight: bold;
+    }
+
+    .a11y-dialog {
+      width: min(620px, calc(100% - 28px));
+      max-height: 88vh;
+      margin: auto;
+      padding: 0;
+      border: 1px solid #8399ad;
+      border-radius: 15px;
+      background: #fff;
+      color: var(--text);
+      overflow: auto;
+    }
+
+    .a11y-dialog::backdrop {
+      background: rgba(13, 31, 48, .65);
+    }
+
+    .dialog-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      padding: 16px 22px;
+      background: var(--background);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .dialog-header h2 {
+      margin: 0;
+      text-align: right;
+      font-size: 1.375rem;
+    }
+
+    .dialog-body {
+      padding: 22px;
+    }
+
+    .dialog-close,
+    .a11y-control {
+      background: #f5f8fc;
+      color: var(--blue);
+      border: 1px solid #6c8195;
+      border-radius: 8px;
+      padding: 10px 14px;
+      min-height: 44px;
+    }
+
+    .a11y-controls {
+      display: grid;
+      gap: 12px;
+    }
+
+    .a11y-control[aria-pressed="true"] {
+      background: var(--blue);
+      color: #fff;
+    }
+
+    .a11y-control-group {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .a11y-status {
+      min-height: 1.5em;
+      color: var(--muted);
+    }
+
+    html.a11y-contrast body,
+    html.a11y-contrast .hero,
+    html.a11y-contrast .how,
+    html.a11y-contrast .step,
+    html.a11y-contrast .problem,
+    html.a11y-contrast .form-card {
+      background: white;
+      background-image: none;
+      color: #111;
+    }
+
+    html.a11y-contrast h1,
+    html.a11y-contrast h2,
+    html.a11y-contrast h3,
+    html.a11y-contrast p {
+      color: #111;
+    }
+
+    html.a11y-contrast .btn {
+      background: #111;
+      color: #fff;
+    }
+
+    html.a11y-font body {
+      font-family: Tahoma, Arial, sans-serif;
+    }
+
+    html.a11y-links a {
+      text-decoration: underline !important;
+      text-decoration-thickness: 3px !important;
+    }
+
+    html.a11y-spacing p,
+    html.a11y-spacing li,
+    html.a11y-spacing h1,
+    html.a11y-spacing h2 {
+      letter-spacing: .1em;
+      word-spacing: .15em;
+      line-height: 1.9;
+    }
+
+    html.a11y-motion *,
+    html.a11y-motion *::before,
+    html.a11y-motion *::after {
+      scroll-behavior: auto !important;
+      animation: none !important;
+      transition: none !important;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+    }
+
+    /* התאמה לנייד */
+
+    @media (max-width: 700px) {
+      .header-inner {
+        min-height: 105px;
+      }
+
+      .logo-frame {
+        width: 270px;
+        height: 85px;
+      }
+
+      .logo-image {
+        width: 540px;
+        height: 216px;
+        transform: translate(-50%, -50%);
+      }
+
+      .hero {
+        padding: 60px 18px;
+      }
+
+      .hero p {
+        font-size: .9375rem;
+      }
+
+      section {
+        padding: 46px 0;
+      }
+
+      .steps {
+        grid-template-columns: 1fr;
+      }
+
+      .step {
+        padding: 22px;
+      }
+
+      .form-card {
+        padding: 27px 20px;
+      }
+
+      .hero .btn {
+        width: 100%;
+        max-width: 320px;
+      }
+
+      footer {
+        padding: 23px 20px;
+      }
+
+      .accessibility-button {
+        left: 12px;
+        bottom: 15px;
+      }
+    }
+  </style>
 </head>
 
 <body>
@@ -562,7 +566,7 @@ html.a11y-motion *::after {
   דלג לתוכן הראשי
 </a>
 
-<!-- לוגו PlanQuant -->
+<!-- לוגו PlanQuant מוגדל -->
 <header>
   <div class="container header-inner">
     <div class="logo-frame">
@@ -570,8 +574,8 @@ html.a11y-motion *::after {
         src="./PlanQuant.webp"
         alt="PlanQuant – חישוב כמויות"
         class="logo-image"
-        width="500"
-        height="200"
+        width="760"
+        height="304"
       >
     </div>
   </div>
@@ -579,7 +583,7 @@ html.a11y-motion *::after {
 
 <main id="main-content" tabindex="-1">
 
-  <!-- פתיחה -->
+  <!-- אזור פתיחה -->
   <section class="hero" aria-labelledby="heroTitle">
     <span class="tag">
       חישוב כמויות באמצעות AI
@@ -601,7 +605,7 @@ html.a11y-motion *::after {
     </button>
   </section>
 
-  <!-- בעיות -->
+  <!-- הבעיות -->
   <section aria-labelledby="problemsTitle">
     <div class="container">
       <h2 id="problemsTitle">נשמע מוכר?</h2>
@@ -625,7 +629,7 @@ html.a11y-motion *::after {
     </div>
   </section>
 
-  <!-- שלבי עבודה -->
+  <!-- שלבי העבודה -->
   <section class="how" aria-labelledby="stepsTitle">
     <div class="container">
       <h2 id="stepsTitle">איך זה עובד?</h2>
@@ -734,6 +738,7 @@ html.a11y-motion *::after {
               tabindex="-1"
               hidden
             ></p>
+
           </form>
         </div>
 
@@ -784,6 +789,7 @@ html.a11y-motion *::after {
   <span>נגישות</span>
 </button>
 
+<!-- הגדרות נגישות -->
 <dialog
   id="accessibilitySettings"
   class="a11y-dialog"
@@ -791,6 +797,7 @@ html.a11y-motion *::after {
 >
   <div class="dialog-header">
     <h2 id="settingsTitle">הגדרות נגישות</h2>
+
     <button
       type="button"
       class="dialog-close"
@@ -800,57 +807,81 @@ html.a11y-motion *::after {
   </div>
 
   <div class="dialog-body a11y-controls">
+
     <h3>גודל טקסט</h3>
+
     <div class="a11y-control-group">
-      <button type="button" class="a11y-control" id="increaseText">
+      <button
+        type="button"
+        class="a11y-control"
+        id="increaseText"
+      >
         A+ הגדלה
       </button>
+
       <output id="textSizeValue">100%</output>
-      <button type="button" class="a11y-control" id="decreaseText">
+
+      <button
+        type="button"
+        class="a11y-control"
+        id="decreaseText"
+      >
         A− הקטנה
       </button>
     </div>
 
-    <button type="button" class="a11y-control" data-a11y="contrast" aria-pressed="false">
+    <button type="button" class="a11y-control"
+      data-a11y="contrast" aria-pressed="false">
       ניגודיות גבוהה
     </button>
 
-    <button type="button" class="a11y-control" data-a11y="font" aria-pressed="false">
+    <button type="button" class="a11y-control"
+      data-a11y="font" aria-pressed="false">
       גופן קריא
     </button>
 
-    <button type="button" class="a11y-control" data-a11y="spacing" aria-pressed="false">
+    <button type="button" class="a11y-control"
+      data-a11y="spacing" aria-pressed="false">
       ריווח טקסט
     </button>
 
-    <button type="button" class="a11y-control" data-a11y="links" aria-pressed="false">
+    <button type="button" class="a11y-control"
+      data-a11y="links" aria-pressed="false">
       הדגשת קישורים
     </button>
 
-    <button type="button" class="a11y-control" data-a11y="motion" aria-pressed="false">
+    <button type="button" class="a11y-control"
+      data-a11y="motion" aria-pressed="false">
       הפחתת אנימציות
     </button>
 
     <h3>הקראת טקסט</h3>
+
     <p>
       איכות ההקראה בעברית תלויה בקול הזמין
       במכשיר ובדפדפן.
     </p>
 
     <div class="a11y-control-group">
-      <button type="button" class="a11y-control" id="readText">
+      <button type="button"
+        class="a11y-control" id="readText">
         הקרא את הדף
       </button>
-      <button type="button" class="a11y-control" id="stopReading" disabled>
+
+      <button type="button"
+        class="a11y-control" id="stopReading" disabled>
         עצור הקראה
       </button>
     </div>
 
-    <p id="speechStatus" class="a11y-status" role="status"></p>
+    <p id="speechStatus"
+      class="a11y-status" role="status"></p>
 
-    <button type="button" class="a11y-control" id="resetAccessibility">
+    <button type="button"
+      class="a11y-control" id="resetAccessibility">
       איפוס הגדרות
     </button>
+
   </div>
 </dialog>
 
@@ -862,6 +893,7 @@ html.a11y-motion *::after {
 >
   <div class="dialog-header">
     <h2 id="statementTitle">הצהרת נגישות</h2>
+
     <button
       type="button"
       class="dialog-close"
@@ -910,337 +942,337 @@ html.a11y-motion *::after {
 </dialog>
 
 <script>
-/* חיבור Make הקיים */
-const MAKE_WEBHOOK_URL =
-  "https://hook.eu1.make.com/exy2ts1g9lcvkvz498t4x4fq38olw33q";
+  /* חיבור Make */
+  const MAKE_WEBHOOK_URL =
+    "https://hook.eu1.make.com/exy2ts1g9lcvkvz498t4x4fq38olw33q";
 
-const root = document.documentElement;
-const byId = id => document.getElementById(id);
+  const root = document.documentElement;
+  const byId = id => document.getElementById(id);
 
-/* מעבר לטופס */
-byId("heroCTA").addEventListener("click", () => {
-  const reduced = window.matchMedia(
-    "(prefers-reduced-motion: reduce)"
-  ).matches || root.classList.contains("a11y-motion");
+  /* מעבר לטופס */
+  byId("heroCTA").addEventListener("click", () => {
+    const reduced = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches || root.classList.contains("a11y-motion");
 
-  byId("contact").scrollIntoView({
-    behavior: reduced ? "auto" : "smooth"
+    byId("contact").scrollIntoView({
+      behavior: reduced ? "auto" : "smooth"
+    });
+
+    byId("fullName").focus({ preventScroll: true });
   });
 
-  byId("fullName").focus({ preventScroll: true });
-});
+  /* חלוניות */
+  function configureDialog(dialogId, openerId) {
+    const dialog = byId(dialogId);
+    const opener = byId(openerId);
 
-/* חלוניות */
-function configureDialog(dialogId, openerId) {
-  const dialog = byId(dialogId);
-  const opener = byId(openerId);
+    opener.addEventListener("click", () => {
+      if (typeof dialog.showModal === "function") {
+        dialog.showModal();
+        opener.setAttribute("aria-expanded", "true");
+      }
+    });
 
-  opener.addEventListener("click", () => {
-    if (typeof dialog.showModal === "function") {
-      dialog.showModal();
-      opener.setAttribute("aria-expanded", "true");
-    }
-  });
+    dialog.querySelector("[data-close]")
+      .addEventListener("click", () => dialog.close());
 
-  dialog.querySelector("[data-close]").addEventListener(
-    "click", () => dialog.close()
-  );
+    dialog.addEventListener("click", event => {
+      if (event.target === dialog) dialog.close();
+    });
 
-  dialog.addEventListener("click", event => {
-    if (event.target === dialog) dialog.close();
-  });
-
-  dialog.addEventListener("close", () => {
-    opener.setAttribute("aria-expanded", "false");
-    opener.focus();
-  });
-}
-
-configureDialog(
-  "accessibilitySettings",
-  "accessibilityLauncher"
-);
-
-configureDialog(
-  "statementDialog",
-  "statementLink"
-);
-
-/* אפשרויות נגישות */
-const defaultPreferences = {
-  scale: 100,
-  contrast: false,
-  font: false,
-  spacing: false,
-  links: false,
-  motion: false
-};
-
-let preferences = { ...defaultPreferences };
-
-function applyAccessibility() {
-  root.style.setProperty(
-    "--scale",
-    String(preferences.scale / 100)
-  );
-
-  for (const key of [
-    "contrast", "font", "spacing", "links", "motion"
-  ]) {
-    root.classList.toggle(
-      "a11y-" + key,
-      preferences[key]
-    );
+    dialog.addEventListener("close", () => {
+      opener.setAttribute("aria-expanded", "false");
+      opener.focus();
+    });
   }
 
-  byId("textSizeValue").textContent =
-    preferences.scale + "%";
+  configureDialog(
+    "accessibilitySettings",
+    "accessibilityLauncher"
+  );
 
-  byId("increaseText").disabled =
-    preferences.scale >= 200;
+  configureDialog(
+    "statementDialog",
+    "statementLink"
+  );
 
-  byId("decreaseText").disabled =
-    preferences.scale <= 100;
+  /* הגדרות נגישות */
+  const defaultPreferences = {
+    scale: 100,
+    contrast: false,
+    font: false,
+    spacing: false,
+    links: false,
+    motion: false
+  };
+
+  let preferences = { ...defaultPreferences };
+
+  function applyAccessibility() {
+    root.style.setProperty(
+      "--scale",
+      String(preferences.scale / 100)
+    );
+
+    for (const key of [
+      "contrast", "font", "spacing", "links", "motion"
+    ]) {
+      root.classList.toggle(
+        "a11y-" + key,
+        preferences[key]
+      );
+    }
+
+    byId("textSizeValue").textContent =
+      preferences.scale + "%";
+
+    byId("increaseText").disabled =
+      preferences.scale >= 200;
+
+    byId("decreaseText").disabled =
+      preferences.scale <= 100;
+
+    document.querySelectorAll("[data-a11y]")
+      .forEach(button => {
+        const key = button.dataset.a11y;
+        button.setAttribute(
+          "aria-pressed",
+          String(preferences[key])
+        );
+      });
+  }
+
+  byId("increaseText").addEventListener("click", () => {
+    preferences.scale = Math.min(
+      200, preferences.scale + 10
+    );
+    applyAccessibility();
+  });
+
+  byId("decreaseText").addEventListener("click", () => {
+    preferences.scale = Math.max(
+      100, preferences.scale - 10
+    );
+    applyAccessibility();
+  });
 
   document.querySelectorAll("[data-a11y]")
     .forEach(button => {
-      const key = button.dataset.a11y;
-      button.setAttribute(
-        "aria-pressed",
-        String(preferences[key])
-      );
+      button.addEventListener("click", () => {
+        const key = button.dataset.a11y;
+        preferences[key] = !preferences[key];
+        applyAccessibility();
+      });
     });
-}
 
-byId("increaseText").addEventListener("click", () => {
-  preferences.scale = Math.min(
-    200, preferences.scale + 10
-  );
-  applyAccessibility();
-});
-
-byId("decreaseText").addEventListener("click", () => {
-  preferences.scale = Math.max(
-    100, preferences.scale - 10
-  );
-  applyAccessibility();
-});
-
-document.querySelectorAll("[data-a11y]")
-  .forEach(button => {
-    button.addEventListener("click", () => {
-      const key = button.dataset.a11y;
-      preferences[key] = !preferences[key];
+  byId("resetAccessibility").addEventListener(
+    "click", () => {
+      preferences = { ...defaultPreferences };
       applyAccessibility();
-    });
+    }
+  );
+
+  applyAccessibility();
+
+  /* הקראה */
+  const synth = window.speechSynthesis;
+  const readButton = byId("readText");
+  const stopButton = byId("stopReading");
+  let speechParts = [];
+  let speechSession = 0;
+
+  function speechStatus(message, active) {
+    byId("speechStatus").textContent = message;
+    readButton.disabled = active;
+    stopButton.disabled = !active;
+  }
+
+  function stopSpeech() {
+    speechSession++;
+    speechParts = [];
+    if (synth) synth.cancel();
+    speechStatus("ההקראה נעצרה.", false);
+  }
+
+  function speakNext(session, voice) {
+    if (session !== speechSession) return;
+
+    if (!speechParts.length) {
+      speechStatus("ההקראה הסתיימה.", false);
+      return;
+    }
+
+    const utterance = new SpeechSynthesisUtterance(
+      speechParts.shift()
+    );
+
+    utterance.lang = "he-IL";
+    utterance.voice = voice;
+    utterance.rate = 0.85;
+
+    utterance.onend = () => speakNext(session, voice);
+
+    utterance.onerror = () => {
+      if (session !== speechSession) return;
+      speechSession++;
+      speechStatus("לא ניתן להשלים את ההקראה.", false);
+    };
+
+    synth.speak(utterance);
+  }
+
+  readButton.addEventListener("click", () => {
+    if (!synth || !window.SpeechSynthesisUtterance) {
+      speechStatus("הדפדפן אינו תומך בהקראה.", false);
+      return;
+    }
+
+    const voice = synth.getVoices().find(
+      v => /^he([-_]|$)/i.test(v.lang)
+    );
+
+    if (!voice) {
+      speechStatus("לא נמצא קול הקראה בעברית.", false);
+      return;
+    }
+
+    const text = Array.from(
+      document.querySelectorAll(
+        "#main-content h1, #main-content h2, " +
+        "#main-content h3, #main-content p, " +
+        "#main-content label, #main-content .problem"
+      )
+    )
+      .filter(el => el.getClientRects().length > 0)
+      .map(el => {
+        const copy = el.cloneNode(true);
+        copy.querySelectorAll('[aria-hidden="true"]')
+          .forEach(node => node.remove());
+
+        return copy.textContent.trim()
+          .replace(/\bPDF\b/gi, "פי די אף")
+          .replace(/\bAI\b/gi, "בינה מלאכותית")
+          .replace(/\bExcel\b/gi, "אקסל");
+      })
+      .filter(Boolean)
+      .join(". ");
+
+    speechParts = text.match(/.{1,130}(?:\s|$)/g) || [text];
+    speechSession++;
+    synth.cancel();
+
+    speechStatus("מתבצעת הקראה בעברית...", true);
+    speakNext(speechSession, voice);
   });
 
-byId("resetAccessibility").addEventListener(
-  "click", () => {
-    preferences = { ...defaultPreferences };
-    applyAccessibility();
-  }
-);
+  stopButton.addEventListener("click", stopSpeech);
 
-applyAccessibility();
+  /* בדיקת מספר טלפון */
+  const phoneInput = byId("phone");
+  const phoneError = byId("phoneError");
 
-/* הקראה */
-const synth = window.speechSynthesis;
-const readButton = byId("readText");
-const stopButton = byId("stopReading");
-let speechParts = [];
-let speechSession = 0;
+  function validatePhone(showError = false) {
+    const valid = /^05[0-9]{8}$/.test(phoneInput.value);
+    const show = !valid && showError;
 
-function speechStatus(message, active) {
-  byId("speechStatus").textContent = message;
-  readButton.disabled = active;
-  stopButton.disabled = !active;
-}
+    phoneError.hidden = !show;
 
-function stopSpeech() {
-  speechSession++;
-  speechParts = [];
-  if (synth) synth.cancel();
-  speechStatus("ההקראה נעצרה.", false);
-}
+    if (show) {
+      phoneInput.setAttribute("aria-invalid", "true");
+    } else {
+      phoneInput.removeAttribute("aria-invalid");
+    }
 
-function speakNext(session, voice) {
-  if (session !== speechSession) return;
-
-  if (!speechParts.length) {
-    speechStatus("ההקראה הסתיימה.", false);
-    return;
+    return valid;
   }
 
-  const utterance = new SpeechSynthesisUtterance(
-    speechParts.shift()
-  );
+  phoneInput.addEventListener("input", () => {
+    phoneInput.value = phoneInput.value
+      .replace(/[^0-9]/g, "")
+      .slice(0, 10);
 
-  utterance.lang = "he-IL";
-  utterance.voice = voice;
-  utterance.rate = 0.85;
+    validatePhone(phoneInput.value.length === 10);
+  });
 
-  utterance.onend = () => speakNext(session, voice);
-  utterance.onerror = () => {
-    if (session !== speechSession) return;
-    speechSession++;
-    speechStatus("לא ניתן להשלים את ההקראה.", false);
-  };
-
-  synth.speak(utterance);
-}
-
-readButton.addEventListener("click", () => {
-  if (!synth || !window.SpeechSynthesisUtterance) {
-    speechStatus("הדפדפן אינו תומך בהקראה.", false);
-    return;
-  }
-
-  const voice = synth.getVoices().find(
-    v => /^he([-_]|$)/i.test(v.lang)
-  );
-
-  if (!voice) {
-    speechStatus("לא נמצא קול הקראה בעברית.", false);
-    return;
-  }
-
-  const text = Array.from(
-    document.querySelectorAll(
-      "#main-content h1, #main-content h2, " +
-      "#main-content h3, #main-content p, " +
-      "#main-content label, #main-content .problem"
-    )
-  )
-    .filter(el => el.getClientRects().length > 0)
-    .map(el => {
-      const copy = el.cloneNode(true);
-      copy.querySelectorAll('[aria-hidden="true"]')
-        .forEach(node => node.remove());
-
-      return copy.textContent.trim()
-        .replace(/\bPDF\b/gi, "פי די אף")
-        .replace(/\bAI\b/gi, "בינה מלאכותית")
-        .replace(/\bExcel\b/gi, "אקסל");
-    })
-    .filter(Boolean)
-    .join(". ");
-
-  speechParts = text.match(/.{1,130}(?:\s|$)/g) || [text];
-  speechSession++;
-  synth.cancel();
-
-  speechStatus("מתבצעת הקראה בעברית...", true);
-  speakNext(speechSession, voice);
-});
-
-stopButton.addEventListener("click", stopSpeech);
-
-/* בדיקת טלפון */
-const phoneInput = byId("phone");
-const phoneError = byId("phoneError");
-
-function validatePhone(showError = false) {
-  const valid = /^05[0-9]{8}$/.test(phoneInput.value);
-  const show = !valid && showError;
-
-  phoneError.hidden = !show;
-
-  if (show) {
-    phoneInput.setAttribute("aria-invalid", "true");
-  } else {
-    phoneInput.removeAttribute("aria-invalid");
-  }
-
-  return valid;
-}
-
-phoneInput.addEventListener("input", () => {
-  phoneInput.value = phoneInput.value
-    .replace(/[^0-9]/g, "")
-    .slice(0, 10);
-
-  validatePhone(phoneInput.value.length === 10);
-});
-
-phoneInput.addEventListener("blur", () => {
-  validatePhone(true);
-});
-
-/* שליחת טופס */
-const form = byId("leadForm");
-const sendButton = byId("sendButton");
-const errorMessage = byId("errorMessage");
-
-function showFormError(message) {
-  errorMessage.textContent = message;
-  errorMessage.hidden = false;
-  errorMessage.focus();
-}
-
-form.addEventListener("submit", async event => {
-  event.preventDefault();
-  errorMessage.hidden = true;
-
-  if (!form.reportValidity()) {
+  phoneInput.addEventListener("blur", () => {
     validatePhone(true);
-    return;
+  });
+
+  /* שליחת טופס */
+  const form = byId("leadForm");
+  const sendButton = byId("sendButton");
+  const errorMessage = byId("errorMessage");
+
+  function showFormError(message) {
+    errorMessage.textContent = message;
+    errorMessage.hidden = false;
+    errorMessage.focus();
   }
 
-  const name = byId("fullName").value.trim();
-  const email = byId("email").value.trim();
-  const phone = phoneInput.value.trim();
+  form.addEventListener("submit", async event => {
+    event.preventDefault();
+    errorMessage.hidden = true;
 
-  if (!name || !email || !validatePhone(true)) {
-    showFormError("יש למלא את כל השדות בצורה תקינה.");
-    return;
-  }
-
-  sendButton.disabled = true;
-  sendButton.textContent = "שולחים פרטים...";
-
-  try {
-    const payload = new URLSearchParams({
-      name,
-      email,
-      phone
-    });
-
-    const response = await fetch(MAKE_WEBHOOK_URL, {
-      method: "POST",
-      mode: "cors",
-      body: payload
-    });
-
-    if (!response.ok) {
-      throw new Error("HTTP error");
+    if (!form.reportValidity()) {
+      validatePhone(true);
+      return;
     }
 
-    const result = await response.json();
+    const name = byId("fullName").value.trim();
+    const email = byId("email").value.trim();
+    const phone = phoneInput.value.trim();
 
-    if (result.success !== true) {
-      throw new Error("No save confirmation");
+    if (!name || !email || !validatePhone(true)) {
+      showFormError("יש למלא את כל השדות בצורה תקינה.");
+      return;
     }
 
-    byId("formArea").hidden = true;
-    byId("successArea").hidden = false;
+    sendButton.disabled = true;
+    sendButton.textContent = "שולחים פרטים...";
 
-    form.reset();
-    byId("successTitle").focus();
+    try {
+      const payload = new URLSearchParams({
+        name,
+        email,
+        phone
+      });
 
-  } catch (error) {
-    showFormError(
-      "לא הצלחנו לאשר את קבלת הפנייה. " +
-      "נסו שוב מאוחר יותר."
-    );
-  } finally {
-    sendButton.disabled = false;
-    sendButton.textContent = "שליחת פרטים ←";
-  }
-});
+      const response = await fetch(MAKE_WEBHOOK_URL, {
+        method: "POST",
+        mode: "cors",
+        body: payload
+      });
+
+      if (!response.ok) {
+        throw new Error("HTTP error");
+      }
+
+      const result = await response.json();
+
+      if (result.success !== true) {
+        throw new Error("No save confirmation");
+      }
+
+      byId("formArea").hidden = true;
+      byId("successArea").hidden = false;
+
+      form.reset();
+      byId("successTitle").focus();
+
+    } catch (error) {
+      showFormError(
+        "לא הצלחנו לאשר את קבלת הפנייה. " +
+        "נסו שוב מאוחר יותר."
+      );
+    } finally {
+      sendButton.disabled = false;
+      sendButton.textContent = "שליחת פרטים ←";
+    }
+  });
 </script>
 
-<!-- Botpress - החיבור הקיים -->
+<!-- Botpress -->
 <script src="https://cdn.botpress.cloud/webchat/v5.0/inject.js"></script>
 <script
   src="https://files.bpcontent.cloud/2026/10/21/16/20261021165935-PD0P0DLN.js"
