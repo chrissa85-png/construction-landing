@@ -379,18 +379,30 @@ footer {
             required
           >
 
-          <label for="phone">מספר טלפון</label>
-          <input
-            id="phone"
-            name="phone"
-            type="tel"
-            placeholder="050-0000000"
-            autocomplete="tel"
-            inputmode="tel"
-            dir="ltr"
-            maxlength="25"
-            required
-          >
+       
+<label for="phone">מספר טלפון נייד</label>
+
+<input
+  id="phone"
+  name="phone"
+  type="tel"
+  placeholder="0501234567"
+  autocomplete="tel-national"
+  inputmode="numeric"
+  dir="ltr"
+  maxlength="10"
+  pattern="05[0-9]{8}"
+  title="יש להזין מספר נייד ישראלי בן 10 ספרות המתחיל ב־05"
+  oninput="
+    this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10);
+    this.setCustomValidity('');
+  "
+  oninvalid="
+    this.setCustomValidity('יש להזין מספר נייד ישראלי תקין: 10 ספרות המתחילות ב־05');
+  "
+  required
+>
+
 
           <button
             class="btn send-btn"
