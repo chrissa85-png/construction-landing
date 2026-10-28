@@ -10,16 +10,19 @@
 <style>
 :root {
   --blue: #23486f;
-  --blue-light: #e9f2fa;
   --text: #233f58;
-  --muted: #6c8195;
+  --muted: #52697f;
   --background: #f5f8fc;
   --border: #dce5ee;
+  --text-scale: 1;
 }
 
 * { box-sizing: border-box; }
 
-html { scroll-behavior: smooth; }
+html {
+  font-size: calc(16px * var(--text-scale));
+  scroll-behavior: smooth;
+}
 
 body {
   margin: 0;
@@ -27,6 +30,7 @@ body {
   color: var(--text);
   background: var(--background);
   line-height: 1.7;
+  overflow-wrap: anywhere;
 }
 
 .container {
@@ -34,14 +38,46 @@ body {
   margin: auto;
 }
 
+/* נגישות בסיסית */
+
+.skip-link {
+  position: absolute;
+  top: -100px;
+  right: 15px;
+  z-index: 1000;
+  padding: 12px 18px;
+  background: #23486f;
+  color: white;
+  border-radius: 7px;
+}
+
+.skip-link:focus {
+  top: 12px;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible {
+  outline: 3px solid #23486f;
+  outline-offset: 3px;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+/* כותרת */
+
 header {
   background: white;
   padding: 19px 0;
   border-bottom: 1px solid var(--border);
   color: var(--blue);
+  font-size: 1.0625rem;
   font-weight: bold;
-  font-size: 17px;
 }
+
+/* אזור ראשי */
 
 .hero {
   background: linear-gradient(135deg, #e6f0fa, #f9fbfe);
@@ -51,16 +87,16 @@ header {
 
 .tag {
   background: #dae9f8;
-  color: #376d9b;
+  color: #356a95;
   display: inline-block;
   border-radius: 25px;
   padding: 5px 16px;
-  font-size: 13px;
+  font-size: .8125rem;
   font-weight: bold;
 }
 
 h1 {
-  font-size: clamp(30px, 5vw, 46px);
+  font-size: clamp(1.875rem, 5vw, 2.875rem);
   line-height: 1.3;
   margin: 20px 0;
   color: #1b3b59;
@@ -70,7 +106,7 @@ h1 {
   max-width: 625px;
   margin: 0 auto 27px;
   color: var(--muted);
-  font-size: 17px;
+  font-size: 1.0625rem;
 }
 
 .btn {
@@ -82,28 +118,35 @@ h1 {
   font: inherit;
   font-weight: bold;
   cursor: pointer;
-  transition: background .2s;
 }
 
-.btn:hover { background: #376c99; }
+.btn:hover {
+  background: #376c99;
+}
 
 .btn:disabled {
   opacity: .65;
   cursor: wait;
 }
 
-section { padding: 65px 0; }
+section {
+  padding: 65px 0;
+}
 
 h2 {
   text-align: center;
-  font-size: 27px;
-  margin: 0 0 28px;
+  font-size: 1.6875rem;
   color: #20415f;
+  margin: 0 0 28px;
 }
+
+/* בעיות */
 
 .problems {
   max-width: 680px;
   margin: auto;
+  padding: 0;
+  list-style: none;
   display: grid;
   gap: 13px;
 }
@@ -121,12 +164,19 @@ h2 {
   margin-left: 10px;
 }
 
-.how { background: white; }
+/* שלבי עבודה */
+
+.how {
+  background: white;
+}
 
 .steps {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 17px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
 .step {
@@ -151,16 +201,20 @@ h2 {
 
 h3 {
   margin: 0 0 8px;
-  font-size: 17px;
+  font-size: 1.0625rem;
 }
 
 .step p {
   color: var(--muted);
-  font-size: 14px;
+  font-size: .875rem;
   margin: 0;
 }
 
-#contact { scroll-margin-top: 20px; }
+/* טופס */
+
+#contact {
+  scroll-margin-top: 20px;
+}
 
 .form-card {
   max-width: 500px;
@@ -172,18 +226,20 @@ h3 {
   box-shadow: 0 8px 30px #24476d10;
 }
 
-.form-card h2 { margin-bottom: 8px; }
+.form-card h2 {
+  margin-bottom: 8px;
+}
 
 .form-description {
   text-align: center;
   color: var(--muted);
-  font-size: 14px;
+  font-size: .875rem;
   margin-bottom: 28px;
 }
 
 label {
   display: block;
-  font-size: 14px;
+  font-size: .875rem;
   font-weight: bold;
   margin-bottom: 6px;
 }
@@ -191,7 +247,7 @@ label {
 input {
   width: 100%;
   padding: 13px;
-  border: 1px solid #cbd8e4;
+  border: 1px solid #6c8195;
   border-radius: 8px;
   margin-bottom: 19px;
   font: inherit;
@@ -199,25 +255,39 @@ input {
   background: white;
 }
 
-input:focus {
-  outline: 2px solid #80abd0;
-  outline-offset: 1px;
+input::placeholder {
+  color: #52697f;
+  opacity: 1;
 }
 
-.send-btn { width: 100%; }
+input[aria-invalid="true"] {
+  border-color: #ac2b38;
+}
+
+.send-btn {
+  width: 100%;
+}
 
 .privacy-note {
-  font-size: 12px;
+  font-size: .75rem;
   color: var(--muted);
   text-align: center;
   margin: 13px 0 0;
 }
 
-.error {
+.error, .phone-error {
   color: #ac2b38;
-  font-size: 13px;
+  font-size: .8125rem;
+}
+
+.error {
   text-align: center;
   margin-top: 13px;
+}
+
+.phone-error {
+  margin-top: -12px;
+  margin-bottom: 16px;
 }
 
 .success {
@@ -226,34 +296,396 @@ input:focus {
 }
 
 .success-icon {
-  font-size: 35px;
+  font-size: 2.1875rem;
   color: #278067;
-  margin-bottom: 12px;
 }
 
-.success p { color: var(--muted); }
+.success p {
+  color: var(--muted);
+}
 
-[hidden] { display: none !important; }
+/* תחתית הדף */
 
 footer {
-  padding: 23px;
+  padding: 23px 80px;
   text-align: center;
-  font-size: 12px;
-  color: #8194a7;
+  font-size: .75rem;
+  color: var(--muted);
   border-top: 1px solid var(--border);
 }
 
-@media (max-width: 650px) {
-  .hero { padding: 60px 18px; }
-  .hero p { font-size: 15px; }
-  section { padding: 46px 0; }
-  h2 { font-size: 23px; }
-  .steps { grid-template-columns: 1fr; }
-  .step { padding: 22px; }
-  .form-card { padding: 27px 20px; }
+.footer-accessibility-link {
+  background: transparent;
+  border: 0;
+  color: #23486f;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  margin-top: 9px;
+  padding: 5px;
+  font: inherit;
+  font-size: .8125rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* אייקון נגישות */
+
+.accessibility-button {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  width: 64px;
+  min-height: 64px;
+  border-radius: 14px;
+  background: #23486f;
+  color: white;
+  border: 2px solid white;
+  box-shadow: 0 4px 16px #0003;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1px;
+  cursor: pointer;
+  z-index: 100;
+}
+
+.accessibility-button:hover {
+  background: #376c99;
+}
+
+.accessibility-button svg {
+  width: 28px;
+  height: 28px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.accessibility-button span {
+  font-size: .6875rem;
+  font-weight: bold;
+}
+
+/* חלוניות נגישות */
+
+.a11y-dialog {
+  position: fixed;
+  inset: 0;
+  width: min(620px, calc(100% - 28px));
+  max-height: 88vh;
+  max-height: 88dvh;
+  margin: auto;
+  padding: 0;
+  border: 1px solid #8399ad;
+  border-radius: 15px;
+  background: white;
+  color: #233f58;
+  box-shadow: 0 15px 50px #0004;
+  overflow: hidden;
+}
+
+.a11y-dialog::backdrop {
+  background: rgba(13,31,48,.65);
+}
+
+.dialog-header {
+  padding: 17px 23px;
+  background: #f5f8fc;
+  border-bottom: 1px solid #dce5ee;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.dialog-header h2 {
+  text-align: right;
+  font-size: 1.375rem;
+  margin: 0;
+}
+
+.dialog-close {
+  flex-shrink: 0;
+  min-width: 42px;
+  min-height: 42px;
+  border-radius: 8px;
+  background: white;
+  color: #23486f;
+  border: 1px solid #6c8195;
+  font-size: 1.625rem;
+  cursor: pointer;
+}
+
+.dialog-body {
+  padding: 22px;
+  max-height: calc(88vh - 80px);
+  max-height: calc(88dvh - 80px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.dialog-body h3 {
+  color: #20415f;
+  margin: 18px 0 8px;
+}
+
+.dialog-body p,
+.dialog-body li {
+  line-height: 1.9;
+}
+
+.dialog-body a {
+  color: #23486f;
+  text-decoration: underline;
+}
+
+/* פקדי הנגישות */
+
+.a11y-controls {
+  display: grid;
+  gap: 12px;
+}
+
+.a11y-group {
+  padding: 14px;
+  border: 1px solid #dce5ee;
+  border-radius: 10px;
+}
+
+.a11y-group h3 {
+  margin: 0 0 10px;
+  font-size: 1rem;
+}
+
+.a11y-size-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.a11y-control,
+.a11y-toggle {
+  background: #f5f8fc;
+  color: #23486f;
+  border: 1px solid #6c8195;
+  border-radius: 8px;
+  font: inherit;
+  cursor: pointer;
+  padding: 10px 15px;
+  min-height: 44px;
+}
+
+.a11y-control:hover,
+.a11y-toggle:hover {
+  background: #e9f2fa;
+}
+
+.a11y-control:disabled {
+  opacity: .55;
+  cursor: not-allowed;
+}
+
+.a11y-toggle {
+  width: 100%;
+  text-align: right;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.a11y-toggle[aria-pressed="true"] {
+  background: #23486f;
+  color: white;
+  border-color: #23486f;
+}
+
+.a11y-toggle[aria-pressed="true"]::after {
+  content: "✓";
+  font-weight: bold;
+}
+
+.a11y-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0,1fr));
+  gap: 10px;
+}
+
+.a11y-status {
+  font-size: .875rem;
+  color: #52697f;
+  min-height: 1.5em;
+  margin: 10px 0 0;
+}
+
+.a11y-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.a11y-note {
+  font-size: .8125rem;
+  color: #52697f;
+}
+
+.a11y-reset {
+  width: 100%;
+}
+
+.a11y-statement-note {
+  padding: 16px;
+  border-right: 4px solid #23486f;
+  background: #f5f8fc;
+  border-radius: 7px;
+  margin-top: 20px;
+}
+
+/* אפשרויות נגישות פעילות */
+
+/* גופן קריא */
+html.a11y-font body {
+  font-family: Tahoma, Arial, sans-serif;
+}
+
+/* ניגודיות גבוהה */
+html.a11y-contrast body,
+html.a11y-contrast header,
+html.a11y-contrast .how,
+html.a11y-contrast .problem,
+html.a11y-contrast .step,
+html.a11y-contrast .form-card,
+html.a11y-contrast .hero {
+  background: #fff;
+  background-image: none;
+  color: #111;
+}
+
+html.a11y-contrast
+  :is(h1,h2,h3,p,label,header,footer,.step p,.hero p) {
+  color: #111;
+}
+
+html.a11y-contrast
+  :is(.problem,.step,.form-card,input) {
+  border-color: #111;
+}
+
+html.a11y-contrast .tag {
+  background: #fff;
+  color: #111;
+  border: 2px solid #111;
+}
+
+html.a11y-contrast
+  :is(.btn,.accessibility-button) {
+  background: #111;
+  color: #fff;
+}
+
+html.a11y-contrast .a11y-dialog {
+  border-color: #111;
+}
+
+/* ריווח טקסט */
+html.a11y-spacing
+  :is(p,h1,h2,h3,label,li,a,button,span) {
+  letter-spacing: .12em;
+  word-spacing: .16em;
+  line-height: 1.9;
+}
+
+html.a11y-spacing p {
+  margin-bottom: 2em;
+}
+
+/* הדגשת קישורים */
+html.a11y-links a,
+html.a11y-links .footer-accessibility-link {
+  text-decoration: underline !important;
+  text-decoration-thickness: 3px !important;
+  text-underline-offset: 4px;
+  font-weight: bold;
+}
+
+/* הדגשת מיקוד */
+html.a11y-focus :focus-visible {
+  outline: 4px solid #b34400 !important;
+  outline-offset: 4px;
+  box-shadow: 0 0 0 2px white;
+}
+
+/* הפחתת תנועה */
+html.a11y-motion *,
+html.a11y-motion *::before,
+html.a11y-motion *::after {
+  scroll-behavior: auto !important;
+  animation: none !important;
+  transition: none !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    transition-duration: .01ms !important;
+  }
+}
+
+@media (max-width: 700px) {
+  .hero {
+    padding: 60px 18px;
+  }
+
+  .hero p {
+    font-size: .9375rem;
+  }
+
+  section {
+    padding: 46px 0;
+  }
+
+  .steps {
+    grid-template-columns: 1fr;
+  }
+
+  .step {
+    padding: 22px;
+  }
+
+  .form-card {
+    padding: 27px 20px;
+  }
+
   .hero .btn {
     width: 100%;
     max-width: 320px;
+  }
+
+  .a11y-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .accessibility-button {
+    bottom: 15px;
+    left: 12px;
+    width: 60px;
+    min-height: 60px;
+  }
+
+  .dialog-body {
+    padding: 15px;
+  }
+
+  .dialog-header {
+    padding: 13px 16px;
   }
 }
 </style>
@@ -261,18 +693,23 @@ footer {
 
 <body>
 
+<a href="#main-content" class="skip-link">
+  דלג לתוכן הראשי
+</a>
+
 <header>
   <div class="container">
-    ▦ חישוב כמויות בנייה
+    <span aria-hidden="true">▦</span>
+    חישוב כמויות בנייה
   </div>
 </header>
 
-<main>
+<main id="main-content" tabindex="-1">
 
-<section class="hero">
+<section class="hero" aria-labelledby="heroTitle">
   <span class="tag">חישוב כמויות באמצעות AI</span>
 
-  <h1>
+  <h1 id="heroTitle">
     פחות חישובים ידניים.<br>
     יותר זמן לפרויקטים שלך.
   </h1>
@@ -288,74 +725,67 @@ footer {
   </button>
 </section>
 
-<section>
+<section aria-labelledby="problemsTitle">
   <div class="container">
-    <h2>נשמע מוכר?</h2>
+    <h2 id="problemsTitle">נשמע מוכר?</h2>
 
-    <div class="problems">
-      <div class="problem">
-        <span>✕</span>
+    <ul class="problems">
+      <li class="problem">
+        <span aria-hidden="true">✕</span>
         שעות של קריאת תוכניות וחישובים ידניים.
-      </div>
+      </li>
 
-      <div class="problem">
-        <span>✕</span>
+      <li class="problem">
+        <span aria-hidden="true">✕</span>
         טעויות הקלדה וספירה כפולה של אלמנטים.
-      </div>
+      </li>
 
-      <div class="problem">
-        <span>✕</span>
+      <li class="problem">
+        <span aria-hidden="true">✕</span>
         שינויים בתוכנית שמחייבים חישוב מחדש.
-      </div>
-    </div>
+      </li>
+    </ul>
   </div>
 </section>
 
-<section class="how">
+<section class="how" aria-labelledby="stepsTitle">
   <div class="container">
-    <h2>איך זה עובד?</h2>
+    <h2 id="stepsTitle">איך זה עובד?</h2>
 
-    <div class="steps">
-      <div class="step">
-        <div class="number">1</div>
+    <ol class="steps">
+      <li class="step">
+        <div class="number" aria-hidden="true">1</div>
         <h3>מעלים תוכנית</h3>
         <p>מעלים PDF ובוחרים מה רוצים לחשב.</p>
-      </div>
+      </li>
 
-      <div class="step">
-        <div class="number">2</div>
+      <li class="step">
+        <div class="number" aria-hidden="true">2</div>
         <h3>מנתחים ובודקים</h3>
-        <p>
-          AI מחלץ נתונים,
-          והמשתמש בודק ומאשר.
-        </p>
-      </div>
+        <p>AI מחלץ נתונים, והמשתמש בודק ומאשר.</p>
+      </li>
 
-      <div class="step">
-        <div class="number">3</div>
+      <li class="step">
+        <div class="number" aria-hidden="true">3</div>
         <h3>מפיקים כתב כמויות</h3>
-        <p>
-          מחשבים כמויות
-          ומייצאים ל־Excel.
-        </p>
-      </div>
-    </div>
+        <p>מחשבים כמויות ומייצאים ל־Excel.</p>
+      </li>
+    </ol>
   </div>
 </section>
 
-<section id="contact">
+<section id="contact" aria-labelledby="contactTitle">
   <div class="container">
     <div class="form-card">
 
       <div id="formArea">
-        <h2>רוצה לשמוע עוד?</h2>
+        <h2 id="contactTitle">רוצה לשמוע עוד?</h2>
 
         <p class="form-description">
           השאירו פרטים וניצור קשר לבדיקת התאמה.
         </p>
 
         <form id="leadForm">
-
           <label for="fullName">שם מלא</label>
           <input
             id="fullName"
@@ -379,51 +809,35 @@ footer {
             required
           >
 
-       
-<label for="phone">מספר טלפון נייד</label>
+          <label for="phone">מספר טלפון נייד</label>
+          <input
+            id="phone"
+            name="phone"
+            type="tel"
+            placeholder="0501234567"
+            autocomplete="tel-national"
+            inputmode="numeric"
+            dir="ltr"
+            maxlength="10"
+            pattern="05[0-9]{8}"
+            title="יש להזין מספר נייד ישראלי בן 10 ספרות המתחיל ב־05"
+            aria-describedby="phoneError"
+            required
+          >
 
-<input
-  id="phone"
-  name="phone"
-  type="tel"
-  placeholder="0501234567"
-  autocomplete="tel-national"
-  inputmode="numeric"
-  dir="ltr"
-  maxlength="10"
-  pattern="05[0-9]{8}"
-  title="יש להזין מספר נייד ישראלי בן 10 ספרות המתחיל ב־05"
-  aria-describedby="phoneError"
-  oninput="
-    this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10);
-    document.getElementById('phoneError').hidden =
-      !(this.value.length === 10 && !this.validity.valid);
-  "
-  onblur="
-    document.getElementById('phoneError').hidden =
-      this.validity.valid;
-  "
-  oninvalid="
-    document.getElementById('phoneError').hidden = false;
-  "
-  required
->
-
-<p
-  id="phoneError"
-  role="alert"
-  hidden
-  style="color:#c62828; font-size:13px; margin-top:-12px; margin-bottom:16px;"
->
-  יש להזין מספר נייד ישראלי תקין — 10 ספרות המתחילות ב־05.
-</p>
-
-
+          <p
+            id="phoneError"
+            class="phone-error"
+            role="alert"
+            hidden
+          >
+            יש להזין מספר נייד ישראלי תקין — 10 ספרות המתחילות ב־05.
+          </p>
 
           <button
             class="btn send-btn"
-            type="submit"
             id="sendButton"
+            type="submit"
           >
             שליחת פרטים ←
           </button>
@@ -438,7 +852,6 @@ footer {
             role="alert"
             hidden
           ></p>
-
         </form>
       </div>
 
@@ -448,8 +861,10 @@ footer {
         role="status"
         hidden
       >
-        <div class="success-icon">✓</div>
-        <h2>תודה על פנייתך</h2>
+        <div class="success-icon" aria-hidden="true">✓</div>
+        <h2 id="successTitle" tabindex="-1">
+          תודה על פנייתך
+        </h2>
         <p>
           הפרטים התקבלו בהצלחה.<br>
           ניצור איתך קשר בקרוב.
@@ -463,42 +878,558 @@ footer {
 </main>
 
 <footer>
-  חישוב כמויות בנייה | מערכת מבוססת AI
+  <div>חישוב כמויות בנייה | מערכת מבוססת AI</div>
+  <button
+    type="button"
+    class="footer-accessibility-link"
+    id="statementLink"
+  >
+    הצהרת נגישות
+  </button>
 </footer>
 
+<!-- אייקון נגישות שפותח הגדרות -->
+
+<button
+  type="button"
+  class="accessibility-button"
+  id="accessibilityLauncher"
+  aria-label="פתיחת הגדרות נגישות"
+  aria-haspopup="dialog"
+  aria-controls="accessibilitySettings"
+  aria-expanded="false"
+>
+  <svg viewBox="0 0 24 24" aria-hidden="true">
+    <circle cx="12" cy="3.5" r="2"></circle>
+    <path d="M4 8l8 2 8-2"></path>
+    <path d="M12 10v5"></path>
+    <path d="M12 15l-5 6"></path>
+    <path d="M12 15l5 6"></path>
+  </svg>
+  <span>נגישות</span>
+</button>
+
+<!-- תפריט הגדרות נגישות -->
+
+<dialog
+  id="accessibilitySettings"
+  class="a11y-dialog"
+  aria-labelledby="settingsTitle"
+>
+  <div class="dialog-header">
+    <h2 id="settingsTitle" tabindex="-1">
+      הגדרות נגישות
+    </h2>
+    <button
+      type="button"
+      class="dialog-close"
+      id="closeSettings"
+      aria-label="סגירת הגדרות נגישות"
+    >×</button>
+  </div>
+
+  <div class="dialog-body">
+    <div class="a11y-controls">
+
+      <div class="a11y-group">
+        <h3>גודל טקסט</h3>
+        <div class="a11y-size-row">
+          <button
+            type="button"
+            class="a11y-control"
+            id="increaseText"
+          >A+ הגדלה</button>
+
+          <output id="textSizeValue" aria-live="polite">
+            100%
+          </output>
+
+          <button
+            type="button"
+            class="a11y-control"
+            id="decreaseText"
+          >A− הקטנה</button>
+        </div>
+      </div>
+
+      <div class="a11y-grid">
+
+        <button type="button" class="a11y-toggle"
+          data-option="contrast" aria-pressed="false">
+          ניגודיות גבוהה
+        </button>
+
+        <button type="button" class="a11y-toggle"
+          data-option="font" aria-pressed="false">
+          גופן קריא
+        </button>
+
+        <button type="button" class="a11y-toggle"
+          data-option="spacing" aria-pressed="false">
+          ריווח טקסט
+        </button>
+
+        <button type="button" class="a11y-toggle"
+          data-option="links" aria-pressed="false">
+          הדגשת קישורים
+        </button>
+
+        <button type="button" class="a11y-toggle"
+          data-option="focus" aria-pressed="false">
+          הדגשת מיקוד
+        </button>
+
+        <button type="button" class="a11y-toggle"
+          data-option="motion" aria-pressed="false">
+          הפחתת אנימציות
+        </button>
+
+      </div>
+
+      <div class="a11y-group">
+        <h3>הקראת טקסט</h3>
+
+        <p class="a11y-note">
+          ניתן לסמן טקסט בדף ולהפעיל הקראה,
+          או להקריא את תוכן הדף.
+          זמינות ההקראה בעברית תלויה בדפדפן ובמכשיר.
+        </p>
+
+        <div class="a11y-actions">
+          <button
+            type="button"
+            class="a11y-control"
+            id="readText"
+          >
+            הקרא טקסט
+          </button>
+
+          <button
+            type="button"
+            class="a11y-control"
+            id="stopReading"
+            disabled
+          >
+            עצור הקראה
+          </button>
+        </div>
+
+        <p
+          class="a11y-status"
+          id="speechStatus"
+          role="status"
+          aria-live="polite"
+        ></p>
+      </div>
+
+      <button
+        type="button"
+        class="a11y-control a11y-reset"
+        id="resetAccessibility"
+      >
+        איפוס הגדרות נגישות
+      </button>
+
+    </div>
+  </div>
+</dialog>
+
+<!-- הצהרת נגישות נפרדת -->
+
+<dialog
+  id="statementDialog"
+  class="a11y-dialog"
+  aria-labelledby="statementTitle"
+>
+  <div class="dialog-header">
+    <h2 id="statementTitle" tabindex="-1">
+      הצהרת נגישות
+    </h2>
+
+    <button
+      type="button"
+      class="dialog-close"
+      id="closeStatement"
+      aria-label="סגירת הצהרת נגישות"
+    >×</button>
+  </div>
+
+  <div class="dialog-body">
+    <p>
+      באתר "חישוב כמויות בנייה" אנו רואים חשיבות
+      במתן אפשרות שימוש נגישה ושוויונית לכלל המבקרים,
+      לרבות אנשים עם מוגבלות.
+      אנו פועלים לשיפור נגישות האתר בהתאם להוראות
+      חוק שוויון זכויות לאנשים עם מוגבלות,
+      תקנות התאמות נגישות לשירות
+      והתקן הישראלי ת"י 5568,
+      המתייחס להנחיות נגישות תכני אינטרנט ברמה AA.
+    </p>
+
+    <h3>התאמות נגישות שבוצעו באתר</h3>
+
+    <ul>
+      <li>הגדרת שפת האתר לעברית וכיוון כתיבה מימין לשמאל.</li>
+      <li>שימוש במבנה כותרות ושדות טופס בעלי תוויות ברורות.</li>
+      <li>אפשרות ניווט באמצעות מקלדת במרכיבי הדף.</li>
+      <li>סימון חזותי של מיקוד בעת ניווט במקלדת.</li>
+      <li>התאמת הדף לתצוגה במחשבים ובטלפונים ניידים.</li>
+      <li>שימוש בצבעי טקסט משניים בעלי ניגודיות משופרת.</li>
+      <li>הצגת הודעות שגיאה בעת מילוי נתונים לא תקינים בטופס.</li>
+    </ul>
+
+    <h3>סייגים ומגבלות ידועות</h3>
+
+    <p>
+      בדיקות הנגישות של כלל רכיבי האתר טרם הושלמו.
+      בפרט, נגישות רכיב השיחה החיצוני טרם אומתה
+      בבדיקה מלאה במסגרת עבודת ההנגשה.
+      ייתכן שיתגלו קשיים בשימוש ברכיבים מסוימים.
+    </p>
+
+    <h3>פנייה בנושא נגישות</h3>
+
+    <p>
+      אם נתקלתם בבעיית נגישות באתר,
+      או אם דרושה לכם התאמה לצורך קבלת המידע
+      או השירות, ניתן לפנות אליי באמצעות
+      כתובת הדואר האלקטרוני:
+    </p>
+
+    <p>
+      <a href="mailto:chris.sa85@gmail.com">
+        chris.sa85@gmail.com
+      </a>
+    </p>
+
+    <p>
+      מומלץ לציין בפנייה את תיאור הבעיה,
+      את העמוד שבו התרחשה ואת הפעולה שניסיתם לבצע.
+    </p>
+
+    <div class="a11y-statement-note">
+      <strong>עדכון הצהרת הנגישות</strong>
+      <p>
+        הצהרה זו נערכה ביום 28.10.2026.
+        היא משקפת את ההתאמות הידועות בשלב זה
+        ואינה מהווה אישור על עמידה מלאה בתקן.
+      </p>
+    </div>
+  </div>
+</dialog>
+
 <script>
-  // Webhook של Make - הכתובת כבר הוכנסה
+  // חיבור Make הקיים
   const MAKE_WEBHOOK_URL =
     "https://hook.eu1.make.com/exy2ts1g9lcvkvz498t4x4fq38olw33q";
 
-  const heroCTA = document.getElementById("heroCTA");
+  const root = document.documentElement;
+  const main = document.getElementById("main-content");
+
+  // גלילה לטופס
+  document.getElementById("heroCTA")
+    .addEventListener("click", () => {
+      const reduced = window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+      ).matches || root.classList.contains("a11y-motion");
+
+      document.getElementById("contact").scrollIntoView({
+        behavior: reduced ? "auto" : "smooth"
+      });
+
+      document.getElementById("fullName").focus({
+        preventScroll: true
+      });
+    });
+
+  // שמירת העדפות נגישות במכשיר
+  const STORAGE_KEY = "construction-accessibility";
+
+  const defaults = {
+    scale: 100,
+    contrast: false,
+    font: false,
+    spacing: false,
+    links: false,
+    focus: false,
+    motion: false
+  };
+
+  let prefs = { ...defaults };
+
+  try {
+    const saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
+    if (saved && typeof saved === "object") {
+      for (const key of Object.keys(defaults)) {
+        if (key === "scale") {
+          if (Number.isInteger(saved.scale) &&
+              saved.scale >= 100 &&
+              saved.scale <= 200 &&
+              saved.scale % 10 === 0) {
+            prefs.scale = saved.scale;
+          }
+        } else if (typeof saved[key] === "boolean") {
+          prefs[key] = saved[key];
+        }
+      }
+    }
+  } catch (error) {
+    // האתר ממשיך לעבוד גם בלי אחסון מקומי
+  }
+
+  function savePrefs() {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(prefs));
+    } catch (error) {}
+  }
+
+  function applyPrefs() {
+    root.style.setProperty(
+      "--text-scale",
+      String(prefs.scale / 100)
+    );
+
+    for (const key of [
+      "contrast", "font", "spacing",
+      "links", "focus", "motion"
+    ]) {
+      root.classList.toggle("a11y-" + key, prefs[key]);
+    }
+
+    document.getElementById("textSizeValue")
+      .textContent = prefs.scale + "%";
+
+    document.getElementById("increaseText").disabled =
+      prefs.scale >= 200;
+
+    document.getElementById("decreaseText").disabled =
+      prefs.scale <= 100;
+
+    document.querySelectorAll("[data-option]")
+      .forEach(button => {
+        const key = button.dataset.option;
+        button.setAttribute(
+          "aria-pressed",
+          String(prefs[key])
+        );
+      });
+  }
+
+  applyPrefs();
+
+  document.getElementById("increaseText")
+    .addEventListener("click", () => {
+      prefs.scale = Math.min(200, prefs.scale + 10);
+      applyPrefs();
+      savePrefs();
+    });
+
+  document.getElementById("decreaseText")
+    .addEventListener("click", () => {
+      prefs.scale = Math.max(100, prefs.scale - 10);
+      applyPrefs();
+      savePrefs();
+    });
+
+  document.querySelectorAll("[data-option]")
+    .forEach(button => {
+      button.addEventListener("click", () => {
+        const key = button.dataset.option;
+        prefs[key] = !prefs[key];
+        applyPrefs();
+        savePrefs();
+      });
+    });
+
+  document.getElementById("resetAccessibility")
+    .addEventListener("click", () => {
+      prefs = { ...defaults };
+      applyPrefs();
+      savePrefs();
+    });
+
+  // פתיחת וסגירת חלוניות עם החזרת המיקוד
+  function bindDialog(dialogId, openId, closeId) {
+    const dialog = document.getElementById(dialogId);
+    const opener = document.getElementById(openId);
+    const closer = document.getElementById(closeId);
+
+    opener.addEventListener("click", () => {
+      dialog.showModal();
+
+      if (opener.id === "accessibilityLauncher") {
+        opener.setAttribute("aria-expanded", "true");
+      }
+
+      closer.focus();
+    });
+
+    closer.addEventListener("click", () => dialog.close());
+
+    dialog.addEventListener("click", event => {
+      if (event.target === dialog) dialog.close();
+    });
+
+    dialog.addEventListener("close", () => {
+      if (opener.id === "accessibilityLauncher") {
+        opener.setAttribute("aria-expanded", "false");
+      }
+      opener.focus();
+    });
+  }
+
+  bindDialog(
+    "accessibilitySettings",
+    "accessibilityLauncher",
+    "closeSettings"
+  );
+
+  bindDialog(
+    "statementDialog",
+    "statementLink",
+    "closeStatement"
+  );
+
+  // הקראת תוכן באמצעות אפשרויות הדפדפן
+  const readButton = document.getElementById("readText");
+  const stopButton = document.getElementById("stopReading");
+  const speechStatus = document.getElementById("speechStatus");
+
+  let speech = null;
+
+  function stopSpeech() {
+    if ("speechSynthesis" in window) {
+      window.speechSynthesis.cancel();
+    }
+
+    speech = null;
+    stopButton.disabled = true;
+    readButton.disabled = false;
+  }
+
+  readButton.addEventListener("click", () => {
+    if (!("speechSynthesis" in window) ||
+        !("SpeechSynthesisUtterance" in window)) {
+      speechStatus.textContent =
+        "הקראת טקסט אינה נתמכת בדפדפן זה.";
+      return;
+    }
+
+    const selected = window.getSelection()
+      ?.toString().trim();
+
+    const content = selected || main.innerText.trim();
+
+    if (!content) {
+      speechStatus.textContent = "לא נמצא טקסט להקראה.";
+      return;
+    }
+
+    stopSpeech();
+
+    speech = new SpeechSynthesisUtterance(content);
+    speech.lang = "he-IL";
+    speech.rate = 0.9;
+
+    const voices = window.speechSynthesis.getVoices();
+    const hebrewVoice = voices.find(v =>
+      v.lang.toLowerCase().startsWith("he")
+    );
+
+    if (hebrewVoice) {
+      speech.voice = hebrewVoice;
+    }
+
+    speech.onstart = () => {
+      speechStatus.textContent = "מתבצעת הקראה...";
+      stopButton.disabled = false;
+      readButton.disabled = true;
+    };
+
+    speech.onend = () => {
+      speechStatus.textContent = "ההקראה הסתיימה.";
+      stopButton.disabled = true;
+      readButton.disabled = false;
+      speech = null;
+    };
+
+    speech.onerror = () => {
+      speechStatus.textContent =
+        "לא ניתן להשלים את ההקראה בדפדפן זה.";
+      stopButton.disabled = true;
+      readButton.disabled = false;
+      speech = null;
+    };
+
+    try {
+      window.speechSynthesis.speak(speech);
+      stopButton.disabled = false;
+      readButton.disabled = true;
+    } catch (error) {
+      speechStatus.textContent =
+        "לא ניתן להפעיל הקראה במכשיר זה.";
+      stopButton.disabled = true;
+      readButton.disabled = false;
+    }
+  });
+
+  stopButton.addEventListener("click", () => {
+    stopSpeech();
+    speechStatus.textContent = "ההקראה נעצרה.";
+  });
+
+  // אימות מספר טלפון
+  const phoneInput = document.getElementById("phone");
+  const phoneError = document.getElementById("phoneError");
+
+  function checkPhone(showIncomplete = false) {
+    const invalid = !phoneInput.validity.valid;
+    const show = invalid && (
+      showIncomplete || phoneInput.value.length === 10
+    );
+
+    phoneError.hidden = !show;
+
+    if (show) {
+      phoneInput.setAttribute("aria-invalid", "true");
+    } else {
+      phoneInput.removeAttribute("aria-invalid");
+    }
+  }
+
+  phoneInput.addEventListener("input", () => {
+    phoneInput.value = phoneInput.value
+      .replace(/[^0-9]/g, "")
+      .slice(0, 10);
+
+    checkPhone();
+  });
+
+  phoneInput.addEventListener("blur", () => checkPhone(true));
+  phoneInput.addEventListener("invalid", () => checkPhone(true));
+
+  // שליחת פרטים ל-Make
   const form = document.getElementById("leadForm");
   const sendButton = document.getElementById("sendButton");
   const errorMessage = document.getElementById("errorMessage");
 
-  heroCTA.addEventListener("click", () => {
-    document.getElementById("contact").scrollIntoView({
-      behavior: "smooth"
-    });
-  });
-
-  function showError(message) {
-    errorMessage.textContent = message;
-    errorMessage.hidden = false;
-  }
-
-  form.addEventListener("submit", async (event) => {
+  form.addEventListener("submit", async event => {
     event.preventDefault();
     errorMessage.hidden = true;
 
     if (!form.reportValidity()) return;
 
-    const name = document.getElementById("fullName").value.trim();
-    const email = document.getElementById("email").value.trim();
-    const phone = document.getElementById("phone").value.trim();
+    const name = document.getElementById("fullName")
+      .value.trim();
+
+    const email = document.getElementById("email")
+      .value.trim();
+
+    const phone = phoneInput.value.trim();
 
     if (!name || !email || !phone) {
-      showError("יש למלא את כל השדות.");
+      errorMessage.textContent = "יש למלא את כל השדות.";
+      errorMessage.hidden = false;
       return;
     }
 
@@ -507,9 +1438,7 @@ footer {
 
     try {
       const payload = new URLSearchParams({
-        name: name,
-        email: email,
-        phone: phone
+        name, email, phone
       });
 
       const response = await fetch(MAKE_WEBHOOK_URL, {
@@ -524,7 +1453,6 @@ footer {
 
       const result = await response.json();
 
-      // הצלחה רק לאחר אישור שמירה מפורש מ-Make
       if (result.success !== true) {
         throw new Error("No save confirmation");
       }
@@ -534,18 +1462,25 @@ footer {
 
       form.reset();
 
+      document.getElementById("successTitle").focus({
+        preventScroll: true
+      });
+
     } catch (error) {
-      showError(
-        "לא הצלחנו לאשר את קבלת הפנייה. " +
-        "נסו שוב מאוחר יותר."
-      );
+      errorMessage.textContent =
+        "לא הצלחנו לאשר את קבלת הפנייה. נסו שוב מאוחר יותר.";
+      errorMessage.hidden = false;
+
     } finally {
       sendButton.disabled = false;
       sendButton.textContent = "שליחת פרטים ←";
     }
   });
 </script>
+
+<!-- רכיב Botpress הקיים -->
 <script src="https://cdn.botpress.cloud/webchat/v5.0/inject.js"></script>
 <script src="https://files.bpcontent.cloud/2026/10/21/16/20261021165935-PD0P0DLN.js" defer></script>
+
 </body>
 </html>
