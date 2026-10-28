@@ -1,18 +1,274 @@
-
 <!DOCTYPE html>
-<html lang="he" dir="rtl">
-<head>
+<html lang="en-US" dir="rtl" style="--scale: 1; color-scheme: dark; --safe-area-inset-top: 0px; --safe-area-inset-bottom: 0px; --safe-area-inset-left: 0px; --safe-area-inset-right: 0px; --corner-shape: round; --control-spacing: 12px; --cursor-interaction: pointer; --font-mono: ui-monospace, SFMono-Regular, &quot;SF Mono&quot;, menlo, consolas, &quot;Liberation Mono&quot;, monospace; --font-sans: -apple-system-body, ui-sans-serif, -apple-system, system-ui, &quot;Segoe UI&quot;, Helvetica, &quot;Apple Color Emoji&quot;, Arial, sans-serif, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;; --font-size-base: 16px; --font-weight-normal: 400; --radius: 8px; --radius-2xl: 16px; --radius-lg: 8px; --radius-md: 6px; --radius-sm: 4px; --visualize-paint-gutter: 5px;" class="transparentSkybridgeBackground desktopSkybridge dark" data-theme="dark"><head><style>@layer sandbox-defaults{html,body,#root{margin:0;padding:0}}</style><script>globalThis.__codexVisualizationInitialGlobals={"statePersistence":"none","stateModelContext":"none","visualizationStyleVariables":{"--accent":"rgb(19, 52, 99)","--accent-foreground":"rgb(44, 103, 197)","--background":"rgb(0, 0, 0)","--border":"rgba(255, 255, 255, 0.15)","--border-strong":"rgba(255, 255, 255, 0.2)","--card":"color-mix(in oklab, rgb(237, 237, 237) 5%, transparent)","--card-foreground":"rgb(237, 237, 237)","--corner-shape":"round","--control-spacing":"12px","--cursor-interaction":"pointer","--destructive":"rgb(255, 133, 73)","--font-mono":"ui-monospace, SFMono-Regular, \"SF Mono\", menlo, consolas, \"Liberation Mono\", monospace","--font-sans":"-apple-system-body, ui-sans-serif, -apple-system, system-ui, \"Segoe UI\", Helvetica, \"Apple Color Emoji\", Arial, sans-serif, \"Segoe UI Emoji\", \"Segoe UI Symbol\"","--font-size-base":"16px","--font-weight-normal":"400","--foreground":"rgb(237, 237, 237)","--input":"rgba(255, 255, 255, 0.2)","--muted":"color-mix(in srgb, rgb(237, 237, 237) 10%, transparent)","--muted-foreground":"rgb(175, 175, 175)","--popover":"rgb(48, 48, 48)","--popover-foreground":"rgb(237, 237, 237)","--primary":"rgb(44, 103, 197)","--primary-foreground":"rgb(13, 13, 13)","--radius":"8px","--radius-2xl":"16px","--radius-lg":"8px","--radius-md":"6px","--radius-sm":"4px","--ring":"rgb(58, 131, 247)","--secondary":"rgb(48, 48, 48)","--secondary-foreground":"rgb(237, 237, 237)","--blue":"rgb(58, 131, 247)","--orange":"rgb(251, 106, 34)","--green":"rgb(64, 201, 119)","--red":"rgb(255, 103, 100)","--purple":"rgb(173, 123, 249)","--yellow":"rgb(255, 210, 64)","--visualize-paint-gutter":"5px","--viz-series-1":"rgb(44, 103, 197)","--viz-series-2":"#f6d459","--viz-series-3":"#f28ec0","--viz-series-4":"#54ccc2","--viz-series-5":"#71d689","--viz-series-6":"#f79951"},"visualizationTheme":"dark"};</script>
+<style id="codex-visualization-host-theme">:root {}</style>
+<script>
+(() => {
+  // Host colors are defaults; later authored styles can give the same names
+  // their own meaning (for example, --muted as a chart's label color).
+  const hostStyles = document.getElementById("codex-visualization-host-theme");
+  const hostStyle = hostStyles.sheet.cssRules[0].style;
+  // Typography, geometry and interaction cursors still follow the host.
+  const styleForProperty = (property) =>
+    /^--(?:font-|radius|corner-shape$|control-spacing$|cursor-interaction$|icon-size$|visualize-paint-gutter$)/.test(property)
+      ? document.documentElement.style
+      : hostStyle;
+  const initialGlobals =
+    globalThis.__codexVisualizationInitialGlobals ?? globalThis.openai;
+  delete globalThis.__codexVisualizationInitialGlobals;
+  if (initialGlobals?.statePersistence != null) {
+    globalThis.openai ??= {};
+    globalThis.openai.statePersistence = initialGlobals.statePersistence;
+    globalThis.openai.stateModelContext = initialGlobals.stateModelContext ?? "none";
+  }
+  if (!true) {
+    return;
+  }
+  let appliedProperties = [];
+  const applyHostStyleVariables = (styleVariables) => {
+    if (styleVariables == null || typeof styleVariables !== "object") {
+      return;
+    }
+    for (const property of appliedProperties) {
+      styleForProperty(property).removeProperty(property);
+    }
+    appliedProperties = [];
+    for (const [property, value] of Object.entries(styleVariables)) {
+      if (property.startsWith("--") && typeof value === "string") {
+        styleForProperty(property).setProperty(property, value);
+        appliedProperties.push(property);
+      }
+    }
+  };
+
+  const syncHostStyles = (globals) => {
+    applyHostStyleVariables(globals?.visualizationStyleVariables);
+    const sandboxDocument = globalThis.frameElement?.ownerDocument;
+    if (sandboxDocument != null && globals?.visualizationTheme != null) {
+      let colorSchemeMeta = sandboxDocument.querySelector(
+        'meta[name="color-scheme"]',
+      );
+      if (colorSchemeMeta == null) {
+        colorSchemeMeta = sandboxDocument.createElement("meta");
+        colorSchemeMeta.name = "color-scheme";
+        sandboxDocument.head.appendChild(colorSchemeMeta);
+      }
+      colorSchemeMeta.content = globals.visualizationTheme;
+      sandboxDocument.documentElement.style.colorScheme =
+        globals.visualizationTheme;
+      // Paint the host surface behind transparent saved visualization documents.
+      sandboxDocument.documentElement.style.backgroundColor =
+        hostStyle.getPropertyValue("--background");
+    }
+  };
+
+  syncHostStyles(initialGlobals);
+  globalThis.addEventListener("openai:set_globals", (event) => {
+    syncHostStyles(event.detail?.globals);
+  });
+})();
+</script>
+
+
+<script>
+(() => {
+  const reportEnvironmentError = (value) => {
+    const error = value instanceof Error ? value : new Error(String(value));
+    void globalThis.openai
+      .callTool(
+        "__codex_inline_visualization_error__",
+        {
+          message: error.message,
+          name: error.name,
+          stack: error.stack,
+        },
+      )
+      .catch(() => {});
+  };
+
+  globalThis.addEventListener("error", (event) => {
+    if (event.target?.localName === "script") {
+      // A script's own onerror may render a fallback or load an alternative.
+      // Let that handler run; failures it throws still reach the global error path.
+      const handlesError = typeof event.target.onerror === "function";
+      globalThis.queueMicrotask(() => {
+        if (!handlesError && !event.defaultPrevented) {
+          reportEnvironmentError("Visualization script could not be loaded");
+        }
+      });
+    } else if (event.target === globalThis) {
+      reportEnvironmentError(event.error ?? event.message);
+    }
+  }, true);
+  globalThis.addEventListener("unhandledrejection", (event) => {
+    reportEnvironmentError(event.reason);
+  });
+})();
+</script>
+<script id="codex-visualization-variants">
+(() => {
+  let previousSnapshot = "[]";
+  let roots = [];
+  const report = () => {
+    roots = Array.from(
+      document.querySelectorAll(".viz-carousel[data-active-variant]"),
+    ).slice(0, 32);
+    const selectedVariants = roots.flatMap((root, carousel) => {
+      const variant = root.dataset.activeVariant;
+      const label = root.getAttribute("aria-label")?.slice(0, 256);
+      return variant ? [{
+        carousel,
+        ...(label == null ? {} : { label }),
+        variant: variant.slice(0, 256),
+      }] : [];
+    });
+    const snapshot = JSON.stringify(selectedVariants);
+    if (snapshot !== previousSnapshot) {
+      previousSnapshot = snapshot;
+      void globalThis.openai.callTool("__codex_visualization_annotations__", {
+        type: "variants",
+        selectedVariants,
+      }).catch(() => {});
+    }
+  };
+  const observer = new MutationObserver((records) => {
+    if (records.some((record) => record.type === "attributes") || roots.some((root) => !root.isConnected)) {
+      report();
+    }
+  });
+  observer.observe(document, {
+    childList: true,
+    subtree: true,
+    attributes: true,
+    attributeFilter: ["data-active-variant"],
+  });
+  report();
+  globalThis.addEventListener("pagehide", () => observer.disconnect(), { once: true });
+})();
+</script>
+<script>
+(() => {
+  let isHovering = false;
+  let isTouch = false;
+  const reportHover = (nextIsHovering, nextIsTouch = false) => {
+    if (nextIsHovering === isHovering && nextIsTouch === isTouch) {
+      return;
+    }
+    isHovering = nextIsHovering;
+    isTouch = nextIsTouch;
+    void globalThis.openai
+      .callTool(
+        "__codex_inline_visualization_hover__",
+        isTouch ? { isHovering, pointerType: "touch" } : { isHovering },
+      )
+      .catch(() => {});
+  };
+
+  globalThis.addEventListener(
+    "pointerover",
+    (event) =>
+      reportHover(event.pointerType !== "touch", event.pointerType === "touch"),
+    { capture: true },
+  );
+  globalThis.addEventListener(
+    "pointerout",
+    (event) => {
+      if (event.pointerType !== "touch" && event.relatedTarget == null) {
+        reportHover(false);
+      }
+    },
+    { capture: true },
+  );
+})();
+</script>
+<script>
+(() => {
+  const report = (method) => {
+    void globalThis.openai.callTool("__codex_inline_visualization_input__", { method }).catch(() => {});
+  };
+  globalThis.addEventListener("pointerdown", () => report("pointer"), { capture: true });
+  globalThis.addEventListener("keydown", (event) => {
+    if (!event.isComposing && event.key !== "Shift" && !event.altKey && !event.ctrlKey && !event.metaKey) {
+      report(["Tab","ArrowLeft","ArrowRight","ArrowUp","ArrowDown"].includes(event.key) ? "keyboard-navigation" : "keyboard");
+    }
+  }, { capture: true });
+})();
+</script>
+<script>
+(() => {
+  const bubbledClicks = new WeakSet();
+  const interactiveSelector = [
+    "button", "input", "select", "textarea", "label", "summary", "a[href]",
+    "audio[controls]", "video[controls]", "[onclick]", "[data-visualization-interactive]",
+    '[contenteditable]:not([contenteditable="false"])',
+    ...[
+      "button", "checkbox", "combobox", "gridcell", "link", "listbox",
+      "menuitem", "menuitemcheckbox", "menuitemradio", "option", "radio",
+      "scrollbar", "searchbox", "slider", "spinbutton", "switch", "tab",
+      "textbox", "treeitem",
+    ].map((role) => '[role~="' + role + '"]'),
+  ].join(",");
+
+  globalThis.addEventListener("click", (event) => bubbledClicks.add(event));
+  globalThis.addEventListener("click", (event) => {
+    // Capture the path before a control can remove itself. Custom delegated
+    // controls can opt in with data-visualization-interactive.
+    const elements = event.composedPath().filter((target) => target instanceof Element);
+    const isInteractiveTarget = elements.some((element) =>
+      element.matches(interactiveSelector) ||
+      (element.hasAttribute("tabindex") && element.tabIndex >= 0)) ||
+      (elements[0] != null && getComputedStyle(elements[0]).cursor === "pointer");
+    // Use a task, not a microtask: native dispatch can run microtasks between
+    // listeners. Propagation flags are reset when dispatch finishes:
+    // https://dom.spec.whatwg.org/#concept-event-dispatch
+    globalThis.setTimeout(() => {
+      void globalThis.openai.callTool("__codex_inline_visualization_click__", {
+        isInteractive: isInteractiveTarget || event.defaultPrevented ||
+          (event.bubbles && !bubbledClicks.has(event)),
+      }).catch(() => {});
+    }, 0);
+  }, { capture: true });
+})();
+</script>
+<script>
+(() => {
+  globalThis.addEventListener("keydown", (event) => {
+    if (event.isComposing || event.altKey || event.ctrlKey || event.metaKey ||
+      event.shiftKey || !["ArrowLeft", "ArrowRight", "Escape"].includes(event.key)) {
+      return;
+    }
+    const target = event.composedPath().find((element) => element instanceof HTMLElement);
+    const editable = target?.closest("[contenteditable]");
+    const editing = target && (target.isContentEditable ||
+      (editable && editable.getAttribute("contenteditable") !== "false") ||
+      target.closest('input, textarea, select, [role="slider"], [role="spinbutton"], [role="combobox"], [role="listbox"], [role="grid"], [role="tree"], [role="tablist"], [role="menu"]'));
+    if (event.key !== "Escape" && editing) { return; }
+    // Let the widget handle the key before forwarding it across the sandbox.
+    globalThis.setTimeout(() => {
+      if (!event.defaultPrevented && globalThis.openai?.displayMode === "fullscreen") {
+        void globalThis.openai.callTool("__codex_inline_visualization_preview_key__", {
+          key: event.key,
+        }).catch(() => {});
+      }
+    }, 0);
+  });
+})();
+</script>
+
+
+
+
+
+
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="google" content="notranslate">
-
   <title>PlanQuant | חישוב כמויות בנייה</title>
-  <meta name="description" content="PlanQuant - מערכת לחישוב כמויות בנייה מתוכניות PDF באמצעות AI ובקרה מקצועית.">
+  <meta name="description" content="PlanQuant – חישוב כמויות בנייה מתוכניות PDF באמצעות AI ובקרה מקצועית.">
 
   <style>
     :root {
-      --blue: #23486f;
-      --blue-dark: #183956;
+      --navy: #23486f;
+      --navy-dark: #183956;
       --text: #233f58;
       --muted: #52697f;
       --background: #f5f8fc;
@@ -20,9 +276,7 @@
       --scale: 1;
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     html {
       scroll-behavior: smooth;
@@ -33,26 +287,19 @@
       margin: 0;
       font-family: Arial, sans-serif;
       line-height: 1.7;
-      color: var(--text);
       background: var(--background);
+      color: var(--text);
     }
+
+    [hidden] { display: none !important; }
 
     .container {
       width: min(960px, 92%);
-      margin: auto;
+      margin-inline: auto;
     }
 
-    [hidden] {
-      display: none !important;
-    }
-
-    button, input {
-      font: inherit;
-    }
-
-    button {
-      cursor: pointer;
-    }
+    button, input { font: inherit; }
+    button { cursor: pointer; }
 
     button:disabled {
       opacity: .6;
@@ -69,63 +316,75 @@
       top: -100px;
       right: 12px;
       padding: 10px 18px;
-      background: var(--blue);
+      background: var(--navy);
       color: white;
       z-index: 1000;
     }
 
-    .skip-link:focus {
-      top: 10px;
-    }
+    .skip-link:focus { top: 10px; }
 
-    /* כותרת ולוגו מוגדל */
+    /* ===== כותרת ולוגו ===== */
 
-    header {
+    .site-header {
+      position: relative;
+      display: block;
+      width: 100%;
       background: #fff;
       border-bottom: 1px solid var(--border);
+      z-index: 1;
     }
 
     .header-inner {
-      min-height: 130px;
+      min-height: 112px;
+      padding-block: 15px;
       display: flex;
       align-items: center;
       justify-content: flex-start;
     }
 
-    .logo-frame {
-      width: 380px;
-      height: 105px;
-      position: relative;
+    .logo-box {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      max-width: 100%;
+      min-height: 72px;
       overflow: hidden;
-      flex-shrink: 0;
     }
 
-    .logo-image {
-      position: absolute;
-      width: 760px;
-      height: 304px;
-      max-width: none;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
+    .site-logo {
+      display: block;
+      width: min(340px, 100%);
+      height: auto;
+      max-height: 86px;
+      object-fit: contain;
+      object-position: right center;
     }
 
-    /* אזור פתיחה */
+    .logo-placeholder {
+      font-size: .875rem;
+      color: #52697f;
+      border: 1px dashed #9bb1c4;
+      padding: 12px 17px;
+      border-radius: 8px;
+    }
+
+    /* ===== אזור פתיחה ===== */
 
     .hero {
-      background: linear-gradient(
-        135deg, #e6f0fa, #f9fbfe
-      );
-      padding: 85px 20px 75px;
+      display: block;
+      width: 100%;
+      clear: both;
+      background: linear-gradient(135deg, #e6f0fa, #f9fbfe);
       text-align: center;
+      padding: 85px 20px 75px;
     }
 
     .tag {
       display: inline-block;
+      padding: 5px 16px;
+      border-radius: 25px;
       background: #dae9f8;
       color: #356a95;
-      border-radius: 25px;
-      padding: 5px 16px;
       font-size: .8125rem;
       font-weight: bold;
     }
@@ -133,11 +392,11 @@
     h1 {
       font-size: clamp(1.875rem, 5vw, 2.875rem);
       line-height: 1.3;
+      margin: 20px auto;
       color: #1b3b59;
-      margin: 20px 0;
     }
 
-    .hero p {
+    .hero-description {
       max-width: 625px;
       margin: 0 auto 27px;
       color: var(--muted);
@@ -146,143 +405,135 @@
 
     .btn {
       display: inline-block;
-      background: var(--blue);
-      border: none;
-      color: white;
-      padding: 14px 28px;
+      background: var(--navy);
+      border: 0;
       border-radius: 9px;
+      padding: 14px 28px;
+      color: white;
       font-weight: bold;
       text-align: center;
+      text-decoration: none;
     }
 
-    .btn:hover {
-      background: #376c99;
-    }
+    .btn:hover { background: #376c99; }
 
-    /* אזורי תוכן */
-
-    section {
-      padding: 65px 0;
-    }
+    section { padding: 65px 0; }
 
     h2 {
       font-size: 1.6875rem;
-      color: #20415f;
       text-align: center;
+      color: #20415f;
       margin: 0 0 28px;
+      line-height: 1.4;
     }
 
+    /* ===== בעיות ===== */
+
     .problems {
-      list-style: none;
       max-width: 680px;
       margin: auto;
       padding: 0;
       display: grid;
       gap: 13px;
+      list-style: none;
     }
 
     .problem {
+      background: white;
       padding: 17px 20px;
       border: 1px solid var(--border);
       border-radius: 10px;
-      background: #fff;
     }
 
-    .problem span {
+    .problem-mark {
       color: #5185ae;
       font-weight: bold;
       margin-left: 10px;
     }
 
-    /* שלבי עבודה */
+    /* ===== שלבי עבודה ===== */
 
-    .how {
-      background: #fff;
-    }
+    .how { background: white; }
 
     .steps {
-      list-style: none;
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 17px;
       margin: 0;
       padding: 0;
+      list-style: none;
     }
 
     .step {
+      padding: 28px 18px;
       background: var(--background);
       border: 1px solid var(--border);
       border-radius: 12px;
-      padding: 28px 18px;
       text-align: center;
     }
 
     .number {
-      display: grid;
-      place-items: center;
       width: 43px;
       height: 43px;
       margin: 0 auto 15px;
-      background: var(--blue);
-      color: white;
+      display: grid;
+      place-items: center;
       border-radius: 50%;
+      background: var(--navy);
+      color: white;
       font-weight: bold;
     }
 
     .step h3 {
-      font-size: 1.0625rem;
       margin: 0 0 8px;
+      font-size: 1.0625rem;
     }
 
     .step p {
-      font-size: .875rem;
-      color: var(--muted);
       margin: 0;
+      color: var(--muted);
+      font-size: .875rem;
     }
 
-    /* טופס יצירת קשר */
+    /* ===== טופס ===== */
 
-    #contact {
-      scroll-margin-top: 20px;
-    }
+    #contact { scroll-margin-top: 20px; }
 
     .form-card {
       max-width: 500px;
       margin: auto;
       padding: 36px;
-      background: #fff;
+      background: white;
       border: 1px solid var(--border);
       border-radius: 15px;
       box-shadow: 0 8px 30px #24476d10;
     }
 
-    .form-card h2 {
-      margin-bottom: 8px;
-    }
+    .form-card h2 { margin-bottom: 8px; }
 
     .form-description {
       text-align: center;
       color: var(--muted);
       font-size: .875rem;
-      margin-bottom: 28px;
+      margin: 0 0 28px;
     }
 
     label {
       display: block;
+      margin-bottom: 6px;
       font-size: .875rem;
       font-weight: bold;
-      margin-bottom: 6px;
     }
 
     input {
       display: block;
       width: 100%;
-      margin-bottom: 19px;
       padding: 13px;
+      margin-bottom: 19px;
       border: 1px solid #6c8195;
       border-radius: 8px;
+      background: white;
       color: var(--text);
-      background: #fff;
     }
 
     input::placeholder {
@@ -294,21 +545,26 @@
       border-color: #ac2b38;
     }
 
-    .send-btn {
-      width: 100%;
-    }
+    .send-btn { width: 100%; }
 
     .privacy-note {
+      margin: 13px 0 0;
       font-size: .75rem;
       color: var(--muted);
       text-align: center;
-      margin: 13px 0 0;
     }
 
     .error {
       color: #ac2b38;
       font-size: .8125rem;
-      margin-top: 12px;
+      margin: -10px 0 16px;
+    }
+
+    .form-error {
+      margin: 13px 0 0;
+      color: #ac2b38;
+      font-size: .8125rem;
+      text-align: center;
     }
 
     .success {
@@ -317,46 +573,44 @@
     }
 
     .success-icon {
-      font-size: 2.2rem;
       color: #278067;
+      font-size: 2.1875rem;
     }
 
-    .success p {
-      color: var(--muted);
-    }
+    .success p { color: var(--muted); }
 
-    /* תחתית */
+    /* ===== תחתית ===== */
 
     footer {
-      border-top: 1px solid var(--border);
       padding: 23px 80px;
+      border-top: 1px solid var(--border);
       text-align: center;
       font-size: .75rem;
       color: var(--muted);
     }
 
-    .footer-accessibility-link {
-      border: none;
-      background: transparent;
-      color: var(--blue);
-      text-decoration: underline;
-      padding: 8px;
+    .footer-link {
       margin-top: 8px;
+      padding: 8px;
+      border: 0;
+      background: transparent;
+      color: var(--navy);
+      text-decoration: underline;
       font-weight: bold;
     }
 
-    /* נגישות */
+    /* ===== כפתור נגישות ===== */
 
-    .accessibility-button {
+    .accessibility-launcher {
       position: fixed;
-      bottom: 20px;
       left: 20px;
+      bottom: 20px;
       z-index: 100;
       min-width: 64px;
       min-height: 64px;
       border: 2px solid white;
       border-radius: 14px;
-      background: var(--blue);
+      background: var(--navy);
       color: white;
       box-shadow: 0 4px 16px #0003;
       display: flex;
@@ -365,43 +619,50 @@
       justify-content: center;
     }
 
-    .accessibility-button svg {
+    .accessibility-launcher svg {
       width: 28px;
       height: 28px;
       fill: none;
       stroke: currentColor;
       stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
     }
 
-    .accessibility-button span {
+    .accessibility-launcher span {
       font-size: .6875rem;
       font-weight: bold;
     }
 
-    .a11y-dialog {
+    /* ===== חלוניות ===== */
+
+    .site-dialog {
+      position: fixed;
+      inset: 0;
       width: min(620px, calc(100% - 28px));
       max-height: 88vh;
+      max-height: 88dvh;
       margin: auto;
       padding: 0;
       border: 1px solid #8399ad;
       border-radius: 15px;
-      background: #fff;
-      color: var(--text);
-      overflow: auto;
+      background: white;
+      color: #233f58;
+      overflow: hidden;
     }
 
-    .a11y-dialog::backdrop {
+    .site-dialog::backdrop {
       background: rgba(13, 31, 48, .65);
     }
 
     .dialog-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 12px;
       padding: 16px 22px;
-      background: var(--background);
-      border-bottom: 1px solid var(--border);
+      background: #f5f8fc;
+      border-bottom: 1px solid #dce5ee;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
     }
 
     .dialog-header h2 {
@@ -410,18 +671,31 @@
       font-size: 1.375rem;
     }
 
-    .dialog-body {
-      padding: 22px;
-    }
-
     .dialog-close,
     .a11y-control {
+      min-height: 44px;
+      padding: 10px 14px;
       background: #f5f8fc;
-      color: var(--blue);
       border: 1px solid #6c8195;
       border-radius: 8px;
-      padding: 10px 14px;
-      min-height: 44px;
+      color: #23486f;
+    }
+
+    .dialog-body {
+      padding: 22px;
+      max-height: calc(88vh - 78px);
+      max-height: calc(88dvh - 78px);
+      overflow-y: auto;
+    }
+
+    .dialog-body h3 {
+      margin: 18px 0 8px;
+      color: #20415f;
+    }
+
+    .dialog-body a {
+      color: #23486f;
+      text-decoration: underline;
     }
 
     .a11y-controls {
@@ -429,62 +703,67 @@
       gap: 12px;
     }
 
-    .a11y-control[aria-pressed="true"] {
-      background: var(--blue);
-      color: #fff;
-    }
-
-    .a11y-control-group {
+    .a11y-row {
       display: flex;
       flex-wrap: wrap;
       align-items: center;
       gap: 10px;
     }
 
+    .a11y-control[aria-pressed="true"] {
+      background: #23486f;
+      color: white;
+    }
+
     .a11y-status {
+      color: #52697f;
+      font-size: .875rem;
       min-height: 1.5em;
-      color: var(--muted);
     }
 
-    html.a11y-contrast body,
-    html.a11y-contrast .hero,
-    html.a11y-contrast .how,
-    html.a11y-contrast .step,
-    html.a11y-contrast .problem,
-    html.a11y-contrast .form-card {
-      background: white;
-      background-image: none;
-      color: #111;
-    }
-
-    html.a11y-contrast h1,
-    html.a11y-contrast h2,
-    html.a11y-contrast h3,
-    html.a11y-contrast p {
-      color: #111;
-    }
-
-    html.a11y-contrast .btn {
-      background: #111;
-      color: #fff;
-    }
+    /* ===== מצבי נגישות ===== */
 
     html.a11y-font body {
       font-family: Tahoma, Arial, sans-serif;
     }
 
-    html.a11y-links a {
+    html.a11y-contrast {
+      --navy: #111;
+      --text: #111;
+      --muted: #222;
+      --background: #fff;
+      --border: #333;
+    }
+
+    html.a11y-contrast .hero {
+      background: #fff;
+    }
+
+    html.a11y-contrast .tag {
+      background: white;
+      color: #111;
+      border: 2px solid #111;
+    }
+
+    html.a11y-contrast :is(h1,h2,h3,p,label) {
+      color: #111;
+    }
+
+    html.a11y-links a,
+    html.a11y-links .footer-link {
       text-decoration: underline !important;
       text-decoration-thickness: 3px !important;
     }
 
-    html.a11y-spacing p,
-    html.a11y-spacing li,
-    html.a11y-spacing h1,
-    html.a11y-spacing h2 {
+    html.a11y-spacing :is(h1,h2,h3,p,li,label) {
       letter-spacing: .1em;
       word-spacing: .15em;
       line-height: 1.9;
+    }
+
+    html.a11y-focus :focus-visible {
+      outline: 4px solid #a63a00 !important;
+      outline-offset: 4px;
     }
 
     html.a11y-motion *,
@@ -496,87 +775,60 @@
     }
 
     @media (prefers-reduced-motion: reduce) {
-      html {
-        scroll-behavior: auto;
-      }
+      html { scroll-behavior: auto; }
     }
-
-    /* התאמה לנייד */
 
     @media (max-width: 700px) {
       .header-inner {
-        min-height: 105px;
+        min-height: 95px;
       }
 
-      .logo-frame {
-        width: 270px;
-        height: 85px;
+      .site-logo {
+        width: min(285px, 100%);
+        max-height: 75px;
       }
 
-      .logo-image {
-        width: 540px;
-        height: 216px;
-        transform: translate(-50%, -50%);
-      }
+      .hero { padding: 60px 18px; }
+      .hero-description { font-size: .9375rem; }
+      section { padding: 46px 0; }
+      .steps { grid-template-columns: 1fr; }
+      .step { padding: 22px; }
+      .form-card { padding: 27px 20px; }
+      .hero .btn { width: 100%; max-width: 320px; }
+      footer { padding: 23px 20px; }
+      .dialog-body { padding: 16px; }
 
-      .hero {
-        padding: 60px 18px;
-      }
-
-      .hero p {
-        font-size: .9375rem;
-      }
-
-      section {
-        padding: 46px 0;
-      }
-
-      .steps {
-        grid-template-columns: 1fr;
-      }
-
-      .step {
-        padding: 22px;
-      }
-
-      .form-card {
-        padding: 27px 20px;
-      }
-
-      .hero .btn {
-        width: 100%;
-        max-width: 320px;
-      }
-
-      footer {
-        padding: 23px 20px;
-      }
-
-      .accessibility-button {
+      .accessibility-launcher {
         left: 12px;
         bottom: 15px;
       }
     }
   </style>
-</head>
+
+  <!-- ממשק זמני לתצוגה מקדימה בלבד -->
+  
+<style>html, body, #root {
+      margin-top: 0; margin-bottom: 0; padding-top: 0; padding-bottom: 0;
+      
+    }
+html,body,#root{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}html,body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Helvetica Neue,Arial,sans-serif!important}button,input,textarea,select{font-family:inherit}html{background-color:transparent}html.chatgptOled.dark,html.mobileSkybridge.dark{background-color:#000}@supports (font: -apple-system-body){html.mobileSkybridge{font:-apple-system-body}}html.desktopSkybridge.dark{background-color:#1e1e1e}html.transparentSkybridgeBackground,html.transparentSkybridgeBackground.dark{background-color:transparent}html.androidSkybridge,html.androidSkybridge body,html.androidSkybridge *{-webkit-tap-highlight-color:rgba(255,255,255,0)}html.androidSkybridge *::selection,html.androidSkybridge *::-moz-selection{background:#fff0;color:inherit}</style></head>
 
 <body>
+
+<!-- סרגל התצוגה המקדימה: יוסר מהקובץ הסופי -->
+
 
 <a href="#main-content" class="skip-link">
   דלג לתוכן הראשי
 </a>
 
-<!-- לוגו PlanQuant מוגדל -->
-<header>
+<!-- כותרת האתר: מסתיימת לפני הרקע התכלת -->
+<header class="site-header">
   <div class="container header-inner">
-    <div class="logo-frame">
-      <img
-        src="./PlanQuant.webp"
-        alt="PlanQuant – חישוב כמויות"
-        class="logo-image"
-        width="760"
-        height="304"
-      >
+    <div class="logo-box">
+      <img id="siteLogo" class="site-logo" alt="PlanQuant – חישוב כמויות בנייה" src="data:image/png;base64,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">
+
+      
     </div>
   </div>
 </header>
@@ -594,14 +846,14 @@
       יותר זמן לפרויקטים שלך.
     </h1>
 
-    <p>
+    <p class="hero-description">
       מערכת למהנדסי בניין וחשבי כמויות,
       המסייעת להפיק כתב כמויות מתוכניות PDF
       באמצעות AI ובקרה מקצועית.
     </p>
 
     <button type="button" class="btn" id="heroCTA">
-      אני רוצה לשמוע עוד ←
+      אני רוצה לשמוע עוד
     </button>
   </section>
 
@@ -612,17 +864,17 @@
 
       <ul class="problems">
         <li class="problem">
-          <span aria-hidden="true">✕</span>
+          <span class="problem-mark" aria-hidden="true">✕</span>
           שעות של קריאת תוכניות וחישובים ידניים.
         </li>
 
         <li class="problem">
-          <span aria-hidden="true">✕</span>
+          <span class="problem-mark" aria-hidden="true">✕</span>
           טעויות הקלדה וספירה כפולה של אלמנטים.
         </li>
 
         <li class="problem">
-          <span aria-hidden="true">✕</span>
+          <span class="problem-mark" aria-hidden="true">✕</span>
           שינויים בתוכנית שמחייבים חישוב מחדש.
         </li>
       </ul>
@@ -653,15 +905,13 @@
         <li class="step">
           <div class="number" aria-hidden="true">3</div>
           <h3>מפיקים כתב כמויות</h3>
-          <p>
-            מחשבים כמויות ומייצאים ל־Excel.
-          </p>
+          <p>מחשבים כמויות ומייצאים ל־Excel.</p>
         </li>
       </ol>
     </div>
   </section>
 
-  <!-- יצירת קשר -->
+  <!-- טופס יצירת קשר -->
   <section id="contact" aria-labelledby="contactTitle">
     <div class="container">
       <div class="form-card">
@@ -676,109 +926,59 @@
           <form id="leadForm">
 
             <label for="fullName">שם מלא</label>
-            <input
-              id="fullName"
-              name="name"
-              type="text"
-              placeholder="השם שלך"
-              autocomplete="name"
-              maxlength="120"
-              required
-            >
+            <input id="fullName" name="name" type="text" placeholder="השם שלך" autocomplete="name" maxlength="120" required="">
 
             <label for="email">כתובת מייל</label>
-            <input
-              id="email"
-              name="email"
-              type="email"
-              placeholder="example@gmail.com"
-              autocomplete="email"
-              dir="ltr"
-              maxlength="254"
-              required
-            >
+            <input id="email" name="email" type="email" placeholder="example@gmail.com" autocomplete="email" dir="ltr" maxlength="254" required="">
 
             <label for="phone">מספר טלפון נייד</label>
-            <input
-              id="phone"
-              name="phone"
-              type="tel"
-              placeholder="0501234567"
-              autocomplete="tel-national"
-              inputmode="numeric"
-              dir="ltr"
-              maxlength="10"
-              pattern="05[0-9]{8}"
-              title="יש להזין מספר נייד ישראלי בן 10 ספרות המתחיל ב־05"
-              aria-describedby="phoneError"
-              required
-            >
+            <input id="phone" name="phone" type="tel" placeholder="0501234567" autocomplete="tel-national" inputmode="numeric" dir="ltr" maxlength="10" pattern="05[0-9]{8}" title="יש להזין מספר נייד בן 10 ספרות המתחיל ב־05" aria-describedby="phoneError" required="">
 
-            <p id="phoneError" class="error" role="alert" hidden>
+            <p id="phoneError" class="error" role="alert" hidden="">
               יש להזין מספר נייד ישראלי תקין —
               10 ספרות המתחילות ב־05.
             </p>
 
-            <button
-              type="submit"
-              class="btn send-btn"
-              id="sendButton"
-            >
-              שליחת פרטים ←
+            <button type="submit" class="btn send-btn" id="sendButton">
+              שליחת פרטים
             </button>
 
             <p class="privacy-note">
               הפרטים ישמשו ליצירת קשר בנוגע למערכת.
             </p>
 
-            <p
-              id="errorMessage"
-              class="error"
-              role="alert"
-              tabindex="-1"
-              hidden
-            ></p>
-
+            <p id="errorMessage" class="form-error" role="alert" tabindex="-1" hidden=""></p>
           </form>
         </div>
 
-        <div id="successArea" class="success" role="status" hidden>
+        <div id="successArea" class="success" role="status" aria-live="polite" hidden="">
           <div class="success-icon" aria-hidden="true">✓</div>
+
           <h2 id="successTitle" tabindex="-1">
             תודה על פנייתך
           </h2>
-          <p>הפרטים התקבלו בהצלחה.</p>
+
+          <p>
+            הפרטים התקבלו בהצלחה.<br>
+            ניצור איתך קשר תוך 2 ימי עסקים.
+          </p>
         </div>
 
       </div>
     </div>
   </section>
-
 </main>
 
-<!-- תחתית -->
 <footer>
   <div>PlanQuant | חישוב כמויות בנייה</div>
 
-  <button
-    type="button"
-    class="footer-accessibility-link"
-    id="statementLink"
-  >
+  <button type="button" class="footer-link" id="statementLink">
     הצהרת נגישות
   </button>
 </footer>
 
 <!-- כפתור נגישות -->
-<button
-  type="button"
-  class="accessibility-button"
-  id="accessibilityLauncher"
-  aria-label="פתיחת הגדרות נגישות"
-  aria-haspopup="dialog"
-  aria-controls="accessibilitySettings"
-  aria-expanded="false"
->
+<button type="button" class="accessibility-launcher" id="accessibilityLauncher" aria-label="פתיחת הגדרות נגישות" aria-haspopup="dialog" aria-controls="accessibilitySettings" aria-expanded="false">
   <svg viewBox="0 0 24 24" aria-hidden="true">
     <circle cx="12" cy="3.5" r="2"></circle>
     <path d="M4 8l8 2 8-2"></path>
@@ -790,186 +990,183 @@
 </button>
 
 <!-- הגדרות נגישות -->
-<dialog
-  id="accessibilitySettings"
-  class="a11y-dialog"
-  aria-labelledby="settingsTitle"
->
+<dialog class="site-dialog" id="accessibilitySettings" aria-labelledby="settingsTitle">
   <div class="dialog-header">
     <h2 id="settingsTitle">הגדרות נגישות</h2>
 
-    <button
-      type="button"
-      class="dialog-close"
-      data-close="accessibilitySettings"
-      aria-label="סגירה"
-    >×</button>
+    <button type="button" class="dialog-close" data-close="accessibilitySettings" aria-label="סגירת הגדרות נגישות">
+      ×
+    </button>
   </div>
 
   <div class="dialog-body a11y-controls">
-
     <h3>גודל טקסט</h3>
 
-    <div class="a11y-control-group">
-      <button
-        type="button"
-        class="a11y-control"
-        id="increaseText"
-      >
+    <div class="a11y-row">
+      <button type="button" class="a11y-control" id="increaseText">
         A+ הגדלה
       </button>
 
-      <output id="textSizeValue">100%</output>
+      <output id="textSizeValue" aria-live="polite">100%</output>
 
-      <button
-        type="button"
-        class="a11y-control"
-        id="decreaseText"
-      >
+      <button type="button" class="a11y-control" id="decreaseText" disabled="">
         A− הקטנה
       </button>
     </div>
 
-    <button type="button" class="a11y-control"
-      data-a11y="contrast" aria-pressed="false">
+    <button type="button" class="a11y-control" data-a11y="contrast" aria-pressed="false">
       ניגודיות גבוהה
     </button>
 
-    <button type="button" class="a11y-control"
-      data-a11y="font" aria-pressed="false">
+    <button type="button" class="a11y-control" data-a11y="font" aria-pressed="false">
       גופן קריא
     </button>
 
-    <button type="button" class="a11y-control"
-      data-a11y="spacing" aria-pressed="false">
+    <button type="button" class="a11y-control" data-a11y="spacing" aria-pressed="false">
       ריווח טקסט
     </button>
 
-    <button type="button" class="a11y-control"
-      data-a11y="links" aria-pressed="false">
+    <button type="button" class="a11y-control" data-a11y="links" aria-pressed="false">
       הדגשת קישורים
     </button>
 
-    <button type="button" class="a11y-control"
-      data-a11y="motion" aria-pressed="false">
+    <button type="button" class="a11y-control" data-a11y="focus" aria-pressed="false">
+      הדגשת מיקוד
+    </button>
+
+    <button type="button" class="a11y-control" data-a11y="motion" aria-pressed="false">
       הפחתת אנימציות
     </button>
 
     <h3>הקראת טקסט</h3>
 
     <p>
-      איכות ההקראה בעברית תלויה בקול הזמין
-      במכשיר ובדפדפן.
+      איכות ההקראה בעברית תלויה בקול
+      הזמין במכשיר ובדפדפן.
     </p>
 
-    <div class="a11y-control-group">
-      <button type="button"
-        class="a11y-control" id="readText">
+    <div class="a11y-row">
+      <button type="button" class="a11y-control" id="readText">
         הקרא את הדף
       </button>
 
-      <button type="button"
-        class="a11y-control" id="stopReading" disabled>
+      <button type="button" class="a11y-control" id="stopReading" disabled="">
         עצור הקראה
       </button>
     </div>
 
-    <p id="speechStatus"
-      class="a11y-status" role="status"></p>
+    <p id="speechStatus" class="a11y-status" role="status" aria-live="polite"></p>
 
-    <button type="button"
-      class="a11y-control" id="resetAccessibility">
-      איפוס הגדרות
+    <button type="button" class="a11y-control" id="resetAccessibility">
+      איפוס הגדרות נגישות
     </button>
-
   </div>
 </dialog>
 
-<!-- הצהרת נגישות -->
-<dialog
-  id="statementDialog"
-  class="a11y-dialog"
-  aria-labelledby="statementTitle"
->
+<!-- הצהרת נגישות נפרדת -->
+<dialog class="site-dialog" id="statementDialog" aria-labelledby="statementTitle">
   <div class="dialog-header">
     <h2 id="statementTitle">הצהרת נגישות</h2>
 
-    <button
-      type="button"
-      class="dialog-close"
-      data-close="statementDialog"
-      aria-label="סגירה"
-    >×</button>
+    <button type="button" class="dialog-close" data-close="statementDialog" aria-label="סגירת הצהרת נגישות">
+      ×
+    </button>
   </div>
 
   <div class="dialog-body">
     <p>
-      אנו פועלים לשיפור נגישות האתר
-      בהתאם להוראות חוק שוויון זכויות
-      לאנשים עם מוגבלות ותקנות הנגישות.
+      באתר PlanQuant אנו רואים חשיבות
+      במתן אפשרות שימוש נגישה ושוויונית
+      לכלל המבקרים, לרבות אנשים עם מוגבלות.
+
+      אנו פועלים לשיפור נגישות האתר בהתאם
+      להוראות חוק שוויון זכויות לאנשים עם מוגבלות
+      ותקנות התאמות נגישות לשירות.
     </p>
 
-    <h3>התאמות באתר</h3>
+    <h3>התאמות נגישות באתר</h3>
+
     <ul>
-      <li>תמיכה בעברית ובכתיבה מימין לשמאל.</li>
-      <li>תוויות ברורות בשדות הטופס.</li>
-      <li>ניווט במקלדת וסימון מיקוד.</li>
-      <li>התאמה למסכים ניידים.</li>
-      <li>אפשרות לשינוי גודל הטקסט.</li>
-      <li>אפשרות לשינוי ניגודיות.</li>
+      <li>שפת האתר מוגדרת לעברית ובכיוון מימין לשמאל.</li>
+      <li>שדות הטופס כוללים תוויות ברורות.</li>
+      <li>ניתן לנווט ברכיבי הדף באמצעות מקלדת.</li>
+      <li>קיימת הדגשה חזותית של רכיב הנמצא במיקוד.</li>
+      <li>האתר מותאם לתצוגה במחשב ובטלפון נייד.</li>
+      <li>ניתן לשנות את גודל הטקסט ואת ניגודיות התצוגה.</li>
+      <li>מוצגות הודעות שגיאה למילוי לא תקין בטופס.</li>
     </ul>
 
     <h3>מגבלות ידועות</h3>
+
     <p>
       בדיקות הנגישות של כלל רכיבי האתר
-      טרם הושלמו. נגישות רכיב השיחה החיצוני
-      טרם אומתה בבדיקה מלאה.
+      טרם הושלמו. בפרט, נגישות רכיב השיחה
+      החיצוני טרם אומתה בבדיקה מלאה.
     </p>
 
     <h3>פנייה בנושא נגישות</h3>
+
     <p>
-      לדיווח על קושי בנגישות ניתן לפנות לכתובת:
+      לדיווח על קושי בנגישות או לבקשת התאמה,
+      ניתן לפנות בדואר אלקטרוני:
+    </p>
+
+    <p>
       <a href="mailto:chris.sa85@gmail.com">
         chris.sa85@gmail.com
       </a>
     </p>
 
     <p>
-      הצהרה זו אינה מהווה אישור על עמידה
-      מלאה בתקן נגישות.
+      מומלץ לציין את העמוד, תיאור הבעיה
+      והפעולה שניסיתם לבצע.
+    </p>
+
+    <p>
+      הצהרה זו נערכה ביום 28.10.2026
+      ואינה מהווה אישור על עמידה מלאה
+      בתקן נגישות.
     </p>
   </div>
 </dialog>
 
 <script>
-  /* חיבור Make */
+  "use strict";
+
   const MAKE_WEBHOOK_URL =
     "https://hook.eu1.make.com/exy2ts1g9lcvkvz498t4x4fq38olw33q";
 
   const root = document.documentElement;
   const byId = id => document.getElementById(id);
 
-  /* מעבר לטופס */
+  /* ===== מעבר לטופס ===== */
+
   byId("heroCTA").addEventListener("click", () => {
-    const reduced = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
-    ).matches || root.classList.contains("a11y-motion");
+    const reduced =
+      window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+      ).matches ||
+      root.classList.contains("a11y-motion");
 
     byId("contact").scrollIntoView({
       behavior: reduced ? "auto" : "smooth"
     });
 
-    byId("fullName").focus({ preventScroll: true });
+    byId("fullName").focus({
+      preventScroll: true
+    });
   });
 
-  /* חלוניות */
+  /* ===== חלוניות נגישות ===== */
+
   function configureDialog(dialogId, openerId) {
     const dialog = byId(dialogId);
     const opener = byId(openerId);
 
     opener.addEventListener("click", () => {
-      if (typeof dialog.showModal === "function") {
-        dialog.showModal();
+      dialog.showModal();
+
+      if (openerId === "accessibilityLauncher") {
         opener.setAttribute("aria-expanded", "true");
       }
     });
@@ -977,12 +1174,11 @@
     dialog.querySelector("[data-close]")
       .addEventListener("click", () => dialog.close());
 
-    dialog.addEventListener("click", event => {
-      if (event.target === dialog) dialog.close();
-    });
-
     dialog.addEventListener("close", () => {
-      opener.setAttribute("aria-expanded", "false");
+      if (openerId === "accessibilityLauncher") {
+        opener.setAttribute("aria-expanded", "false");
+      }
+
       opener.focus();
     });
   }
@@ -997,17 +1193,58 @@
     "statementLink"
   );
 
-  /* הגדרות נגישות */
-  const defaultPreferences = {
+  /* ===== העדפות נגישות ===== */
+
+  const STORAGE_KEY = "planquant-accessibility";
+
+  const defaults = {
     scale: 100,
     contrast: false,
     font: false,
     spacing: false,
     links: false,
+    focus: false,
     motion: false
   };
 
-  let preferences = { ...defaultPreferences };
+  let preferences = { ...defaults };
+
+  try {
+    const saved = JSON.parse(
+      localStorage.getItem(STORAGE_KEY)
+    );
+
+    if (saved && typeof saved === "object") {
+      if (
+        Number.isInteger(saved.scale) &&
+        saved.scale >= 100 &&
+        saved.scale <= 200 &&
+        saved.scale % 10 === 0
+      ) {
+        preferences.scale = saved.scale;
+      }
+
+      for (const key of Object.keys(defaults)) {
+        if (
+          key !== "scale" &&
+          typeof saved[key] === "boolean"
+        ) {
+          preferences[key] = saved[key];
+        }
+      }
+    }
+  } catch (error) {
+    // המשך פעולה גם אם אחסון מקומי אינו זמין
+  }
+
+  function saveAccessibility() {
+    try {
+      localStorage.setItem(
+        STORAGE_KEY,
+        JSON.stringify(preferences)
+      );
+    } catch (error) {}
+  }
 
   function applyAccessibility() {
     root.style.setProperty(
@@ -1016,7 +1253,8 @@
     );
 
     for (const key of [
-      "contrast", "font", "spacing", "links", "motion"
+      "contrast", "font", "spacing",
+      "links", "focus", "motion"
     ]) {
       root.classList.toggle(
         "a11y-" + key,
@@ -1036,6 +1274,7 @@
     document.querySelectorAll("[data-a11y]")
       .forEach(button => {
         const key = button.dataset.a11y;
+
         button.setAttribute(
           "aria-pressed",
           String(preferences[key])
@@ -1045,44 +1284,56 @@
 
   byId("increaseText").addEventListener("click", () => {
     preferences.scale = Math.min(
-      200, preferences.scale + 10
+      200,
+      preferences.scale + 10
     );
+
     applyAccessibility();
+    saveAccessibility();
   });
 
   byId("decreaseText").addEventListener("click", () => {
     preferences.scale = Math.max(
-      100, preferences.scale - 10
+      100,
+      preferences.scale - 10
     );
+
     applyAccessibility();
+    saveAccessibility();
   });
 
   document.querySelectorAll("[data-a11y]")
     .forEach(button => {
       button.addEventListener("click", () => {
         const key = button.dataset.a11y;
+
         preferences[key] = !preferences[key];
+
         applyAccessibility();
+        saveAccessibility();
       });
     });
 
-  byId("resetAccessibility").addEventListener(
-    "click", () => {
-      preferences = { ...defaultPreferences };
+  byId("resetAccessibility")
+    .addEventListener("click", () => {
+      preferences = { ...defaults };
+
       applyAccessibility();
-    }
-  );
+      saveAccessibility();
+    });
 
   applyAccessibility();
 
-  /* הקראה */
+  /* ===== הקראה בעברית ===== */
+
   const synth = window.speechSynthesis;
   const readButton = byId("readText");
   const stopButton = byId("stopReading");
+
   let speechParts = [];
   let speechSession = 0;
 
-  function speechStatus(message, active) {
+  function updateSpeechStatus(message, active) {
     byId("speechStatus").textContent = message;
     readButton.disabled = active;
     stopButton.disabled = !active;
@@ -1091,15 +1342,17 @@
   function stopSpeech() {
     speechSession++;
     speechParts = [];
+
     if (synth) synth.cancel();
-    speechStatus("ההקראה נעצרה.", false);
+
+    updateSpeechStatus("ההקראה נעצרה.", false);
   }
 
   function speakNext(session, voice) {
     if (session !== speechSession) return;
 
-    if (!speechParts.length) {
-      speechStatus("ההקראה הסתיימה.", false);
+    if (speechParts.length === 0) {
+      updateSpeechStatus("ההקראה הסתיימה.", false);
       return;
     }
 
@@ -1115,16 +1368,47 @@
 
     utterance.onerror = () => {
       if (session !== speechSession) return;
+
       speechSession++;
-      speechStatus("לא ניתן להשלים את ההקראה.", false);
+      speechParts = [];
+
+      updateSpeechStatus(
+        "לא ניתן להשלים את ההקראה.",
+        false
+      );
     };
 
     synth.speak(utterance);
   }
 
+  function splitSpeechText(text, limit = 120) {
+    const words = text.split(/\s+/);
+    const result = [];
+    let current = "";
+
+    for (const word of words) {
+      if ((current + " " + word).length > limit) {
+        if (current) result.push(current);
+        current = word;
+      } else {
+        current += (current ? " " : "") + word;
+      }
+    }
+
+    if (current) result.push(current);
+
+    return result;
+  }
+
   readButton.addEventListener("click", () => {
-    if (!synth || !window.SpeechSynthesisUtterance) {
-      speechStatus("הדפדפן אינו תומך בהקראה.", false);
+    if (
+      !synth ||
+      !("SpeechSynthesisUtterance" in window)
+    ) {
+      updateSpeechStatus(
+        "הדפדפן אינו תומך בהקראה.",
+        false
+      );
       return;
     }
 
@@ -1133,52 +1417,76 @@
     );
 
     if (!voice) {
-      speechStatus("לא נמצא קול הקראה בעברית.", false);
+      updateSpeechStatus(
+        "לא נמצא קול הקראה בעברית.",
+        false
+      );
       return;
     }
 
-    const text = Array.from(
-      document.querySelectorAll(
-        "#main-content h1, #main-content h2, " +
-        "#main-content h3, #main-content p, " +
-        "#main-content label, #main-content .problem"
-      )
-    )
-      .filter(el => el.getClientRects().length > 0)
-      .map(el => {
-        const copy = el.cloneNode(true);
-        copy.querySelectorAll('[aria-hidden="true"]')
-          .forEach(node => node.remove());
+    const elements = document.querySelectorAll(
+      "#main-content h1, " +
+      "#main-content h2, " +
+      "#main-content h3, " +
+      "#main-content p, " +
+      "#main-content label, " +
+      "#main-content .problem"
+    );
 
-        return copy.textContent.trim()
-          .replace(/\bPDF\b/gi, "פי די אף")
-          .replace(/\bAI\b/gi, "בינה מלאכותית")
-          .replace(/\bExcel\b/gi, "אקסל");
-      })
-      .filter(Boolean)
-      .join(". ");
+    const parts = [];
 
-    speechParts = text.match(/.{1,130}(?:\s|$)/g) || [text];
+    elements.forEach(element => {
+      if (!element.getClientRects().length) return;
+
+      const clone = element.cloneNode(true);
+
+      clone.querySelectorAll('[aria-hidden="true"]')
+        .forEach(node => node.remove());
+
+      const text = clone.textContent
+        .trim()
+        .replace(/\bPDF\b/gi, "פי די אף")
+        .replace(/\bAI\b/gi, "בינה מלאכותית")
+        .replace(/\bExcel\b/gi, "אקסל")
+        .replace(/\s+/g, " ");
+
+      if (text) {
+        parts.push(...splitSpeechText(text));
+      }
+    });
+
+    if (!parts.length) {
+      updateSpeechStatus("לא נמצא טקסט להקראה.", false);
+      return;
+    }
+
     speechSession++;
     synth.cancel();
+    speechParts = parts;
 
-    speechStatus("מתבצעת הקראה בעברית...", true);
+    updateSpeechStatus(
+      "מתבצעת הקראה בעברית...",
+      true
+    );
+
     speakNext(speechSession, voice);
   });
 
   stopButton.addEventListener("click", stopSpeech);
 
-  /* בדיקת מספר טלפון */
+  /* ===== אימות טלפון ===== */
+
   const phoneInput = byId("phone");
   const phoneError = byId("phoneError");
 
   function validatePhone(showError = false) {
-    const valid = /^05[0-9]{8}$/.test(phoneInput.value);
-    const show = !valid && showError;
+    const valid = /^05[0-9]{8}$/.test(
+      phoneInput.value
+    );
 
-    phoneError.hidden = !show;
+    phoneError.hidden = valid || !showError;
 
-    if (show) {
+    if (!valid && showError) {
       phoneInput.setAttribute("aria-invalid", "true");
     } else {
       phoneInput.removeAttribute("aria-invalid");
@@ -1199,7 +1507,12 @@
     validatePhone(true);
   });
 
-  /* שליחת טופס */
+  phoneInput.addEventListener("invalid", () => {
+    validatePhone(true);
+  });
+
+  /* ===== שליחת טופס ===== */
+
   const form = byId("leadForm");
   const sendButton = byId("sendButton");
   const errorMessage = byId("errorMessage");
@@ -1224,7 +1537,18 @@
     const phone = phoneInput.value.trim();
 
     if (!name || !email || !validatePhone(true)) {
-      showFormError("יש למלא את כל השדות בצורה תקינה.");
+      showFormError(
+        "יש למלא את כל השדות בצורה תקינה."
+      );
+      return;
+    }
+
+    // מונעים שליחת פניות אמיתיות בתצוגה המקדימה
+    if (byId("previewToolbar")) {
+      showFormError(
+        "זוהי תצוגה מקדימה. " +
+        "הטופס אינו שולח פרטים ל־Make בשלב זה."
+      );
       return;
     }
 
@@ -1238,11 +1562,14 @@
         phone
       });
 
-      const response = await fetch(MAKE_WEBHOOK_URL, {
-        method: "POST",
-        mode: "cors",
-        body: payload
-      });
+      const response = await fetch(
+        MAKE_WEBHOOK_URL,
+        {
+          method: "POST",
+          mode: "cors",
+          body: payload
+        }
+      );
 
       if (!response.ok) {
         throw new Error("HTTP error");
@@ -1258,26 +1585,715 @@
       byId("successArea").hidden = false;
 
       form.reset();
-      byId("successTitle").focus();
+
+      byId("successTitle").focus({
+        preventScroll: true
+      });
 
     } catch (error) {
       showFormError(
         "לא הצלחנו לאשר את קבלת הפנייה. " +
         "נסו שוב מאוחר יותר."
       );
+
     } finally {
       sendButton.disabled = false;
-      sendButton.textContent = "שליחת פרטים ←";
+      sendButton.textContent = "שליחת פרטים";
     }
   });
 </script>
 
-<!-- Botpress -->
-<script src="https://cdn.botpress.cloud/webchat/v5.0/inject.js"></script>
-<script
-  src="https://files.bpcontent.cloud/2026/10/21/16/20261021165935-PD0P0DLN.js"
-  defer
-></script>
+<!-- כלי חד־פעמי להכנת לוגו מוטמע -->
 
-</body>
-</html>
+
+<!-- רכיב Botpress הקיים -->
+<script src="https://cdn.botpress.cloud/webchat/v5.0/inject.js"></script>
+<script src="https://files.bpcontent.cloud/2026/10/21/16/20261021165935-PD0P0DLN.js" defer=""></script>
+
+
+
+
+<script>
+(() => {
+  const contentRange = document.createRange();
+  let previousMeasurement = null;
+  let heightReportTimer = null;
+  const reportHeight = () => {
+    const bodyChildren = Array.from(document.body.children).filter(
+      (element) =>
+        element.tagName !== "SCRIPT" &&
+        element.tagName !== "STYLE" &&
+        element.getAttribute("role") !== "tooltip",
+    );
+    const bodyStyle = globalThis.getComputedStyle(document.body);
+    const contentWidth = Math.max(
+      0,
+      Math.round(
+        globalThis.innerWidth -
+          parseFloat(bodyStyle.paddingLeft) -
+          parseFloat(bodyStyle.paddingRight),
+      ),
+    );
+    let contentHeight;
+    if (bodyChildren.length === 0) {
+      contentRange.selectNodeContents(document.body);
+      contentHeight = contentRange.getBoundingClientRect().height;
+    } else if (bodyChildren.length === 1) {
+      const [bodyChild] = bodyChildren;
+      const childRect = bodyChild.getBoundingClientRect();
+      // Child margins can collapse above the root without adding to its height.
+      // The host adds body padding separately.
+      contentHeight =
+        Math.max(bodyChild.scrollHeight, childRect.height) +
+        Math.max(
+          0,
+          childRect.top -
+            document.body.getBoundingClientRect().top -
+            parseFloat(bodyStyle.paddingTop),
+        );
+    } else {
+      const bodyTop = document.body.getBoundingClientRect().top;
+      contentHeight = Math.max(
+        ...bodyChildren.map(
+          (bodyChild) => bodyChild.getBoundingClientRect().bottom - bodyTop,
+        ),
+      );
+    }
+    const viewportHeight = globalThis.innerHeight;
+    const previous = previousMeasurement;
+    previousMeasurement = { contentHeight, contentWidth, viewportHeight };
+    if (
+      previous != null &&
+      contentWidth === previous.contentWidth &&
+      contentHeight - previous.contentHeight ===
+        viewportHeight - previous.viewportHeight
+    ) {
+      return;
+    }
+
+    void globalThis.openai
+      .callTool(
+        "__codex_inline_visualization_height__",
+        { height: contentHeight, width: contentWidth },
+      )
+      .catch(() => {});
+  };
+  const scheduleHeightReport = () => {
+    if (heightReportTimer != null) {
+      return;
+    }
+    // Offscreen frames can suspend animation callbacks while their content loads.
+    heightReportTimer = globalThis.setTimeout(() => {
+      heightReportTimer = null;
+      reportHeight();
+    }, 0);
+  };
+
+  const resizeObserver = new ResizeObserver(scheduleHeightReport);
+  const observeBodyChildren = () => {
+    for (const element of document.body.children) {
+      resizeObserver.observe(element);
+    }
+  };
+  resizeObserver.observe(document.body);
+  observeBodyChildren();
+  new MutationObserver(() => {
+    observeBodyChildren();
+    scheduleHeightReport();
+  }).observe(document.body, {
+    childList: true,
+    subtree: true,
+    attributes: true,
+    attributeFilter: ["style", "class", "height", "width"],
+  });
+  globalThis.addEventListener("resize", scheduleHeightReport);
+  reportHeight();
+})();
+</script>
+<style id="codex-visualization-document-scrollbar">html,body{scrollbar-width:none!important}html::-webkit-scrollbar,body::-webkit-scrollbar{display:none!important}</style>
+
+<script src="https://unpkg.com/@floating-ui/core@1.7.3/dist/floating-ui.core.umd.min.js"></script>
+<script src="https://unpkg.com/@floating-ui/dom@1.7.4/dist/floating-ui.dom.umd.min.js"></script>
+<script>
+(() => {
+  if (window.FloatingUIDOM == null) {
+    return;
+  }
+  const { autoUpdate, computePosition, flip, offset, shift, size } =
+    window.FloatingUIDOM;
+  const tooltipPlacements = new Set(["top", "right", "bottom", "left"]);
+  const tooltipId = `codex-visualization-tooltip-${
+    window.crypto?.randomUUID?.() ?? Date.now().toString(36)
+  }`;
+  const tooltipGap = 5;
+  const hoverDelay = 700;
+  const skipDelay = 300;
+  let activeTrigger = null;
+  let pendingTrigger = null;
+  let tooltip = null;
+  let openTimeout = null;
+  let autoUpdateCleanup = null;
+  let positionRequest = 0;
+  let skipDelayUntil = 0;
+  let lastPointerWasTouch = false;
+  let pinnedByTouch = false;
+
+  const getTrigger = (event) => {
+    for (const target of event.composedPath()) {
+      if (target?.nodeType === Node.ELEMENT_NODE) {
+        const trigger = target.closest("[data-tooltip]");
+        if (trigger) return trigger;
+      }
+    }
+    return null;
+  };
+  const containsTarget = (trigger, target) =>
+    target?.nodeType != null && trigger.contains(target);
+  const getContent = (trigger) =>
+    trigger.getAttribute("data-tooltip")?.trim() ?? "";
+  const getPlacement = (trigger) => {
+    const placement = trigger.getAttribute("data-tooltip-placement");
+    return tooltipPlacements.has(placement) ? placement : "top";
+  };
+  const getTooltip = () => {
+    if (tooltip == null) {
+      tooltip = document.createElement("div");
+      tooltip.id = tooltipId;
+      tooltip.className = "tooltip";
+      tooltip.setAttribute("role", "tooltip");
+    }
+    return tooltip;
+  };
+  const setDescribedBy = (trigger, described) => {
+    const ids = new Set(
+      (trigger.getAttribute("aria-describedby") ?? "")
+        .split(/\s+/)
+        .filter(Boolean),
+    );
+    if (described) {
+      ids.add(tooltipId);
+    } else {
+      ids.delete(tooltipId);
+    }
+    if (ids.size === 0) {
+      trigger.removeAttribute("aria-describedby");
+    } else {
+      trigger.setAttribute("aria-describedby", [...ids].join(" "));
+    }
+  };
+  const clearOpenTimeout = () => {
+    if (openTimeout != null) {
+      window.clearTimeout(openTimeout);
+      openTimeout = null;
+    }
+    pendingTrigger = null;
+  };
+  const closeTooltip = (activateSkipDelay = true) => {
+    clearOpenTimeout();
+    pinnedByTouch = false;
+    positionRequest += 1;
+    autoUpdateCleanup?.();
+    autoUpdateCleanup = null;
+    if (activeTrigger == null) {
+      return;
+    }
+    setDescribedBy(activeTrigger, false);
+    activeTrigger = null;
+    tooltip?.remove();
+    if (activateSkipDelay) {
+      skipDelayUntil = Date.now() + skipDelay;
+    }
+  };
+  const updatePosition = (trigger, floating) => {
+    const request = ++positionRequest;
+    void computePosition(trigger, floating, {
+      middleware: [
+        offset(tooltipGap),
+        flip({ padding: tooltipGap }),
+        shift({ padding: tooltipGap }),
+        size({
+          padding: tooltipGap,
+          apply({ availableHeight, availableWidth, elements }) {
+            elements.floating.style.setProperty(
+              "--tooltip-available-width",
+              `${Math.max(0, availableWidth)}px`,
+            );
+            elements.floating.style.setProperty(
+              "--tooltip-available-height",
+              `${Math.max(0, availableHeight)}px`,
+            );
+          },
+        }),
+      ],
+      placement: getPlacement(trigger),
+      strategy: "fixed",
+    })
+      .then(({ x, y }) => {
+        if (activeTrigger !== trigger || request !== positionRequest) {
+          return;
+        }
+        const scale = window.devicePixelRatio || 1;
+        floating.style.transform = `translate(${Math.round(x * scale) / scale}px, ${Math.round(y * scale) / scale}px)`;
+        floating.style.visibility = "visible";
+      })
+      .catch(() => {
+        if (activeTrigger === trigger && request === positionRequest) {
+          closeTooltip(false);
+        }
+      });
+  };
+  const openTooltip = (trigger) => {
+    const content = getContent(trigger);
+    if (!trigger.isConnected || content.length === 0) {
+      return;
+    }
+    clearOpenTimeout();
+    if (activeTrigger === trigger) {
+      return;
+    }
+    closeTooltip();
+    const floating = getTooltip();
+    floating.textContent = content;
+    floating.style.visibility = "hidden";
+    floating.style.transform = "translate(0, 0)";
+    document.body.appendChild(floating);
+    activeTrigger = trigger;
+    setDescribedBy(trigger, true);
+    autoUpdateCleanup = autoUpdate(trigger, floating, () => {
+      updatePosition(trigger, floating);
+    });
+  };
+  const requestOpen = (trigger, immediate = false) => {
+    if (
+      getContent(trigger).length === 0 ||
+      activeTrigger === trigger ||
+      pendingTrigger === trigger
+    ) {
+      return;
+    }
+    clearOpenTimeout();
+    pendingTrigger = trigger;
+    const delay =
+      immediate || activeTrigger != null || Date.now() < skipDelayUntil
+        ? 0
+        : hoverDelay;
+    if (delay === 0) {
+      openTooltip(trigger);
+      return;
+    }
+    openTimeout = window.setTimeout(() => {
+      openTimeout = null;
+      pendingTrigger = null;
+      openTooltip(trigger);
+    }, delay);
+  };
+  const handlePointerOpen = (event) => {
+    if (event.pointerType === "touch") {
+      return;
+    }
+    const trigger = getTrigger(event);
+    if (trigger == null || containsTarget(trigger, event.relatedTarget)) {
+      return;
+    }
+    requestOpen(trigger);
+  };
+  const handlePointer = (event) => {
+    lastPointerWasTouch =
+      event.type === "pointerdown" && event.pointerType === "touch";
+  };
+  const handleTouchClick = (event) => {
+    const isTouch = event.pointerType === "touch" || lastPointerWasTouch;
+    lastPointerWasTouch = false;
+    if (!isTouch || event.detail === 0) {
+      return;
+    }
+    const trigger = getTrigger(event);
+    if (
+      trigger == null ||
+      !trigger.isConnected ||
+      getContent(trigger).length === 0 ||
+      (pinnedByTouch && activeTrigger === trigger)
+    ) {
+      if (pinnedByTouch) {
+        closeTooltip();
+      }
+      return;
+    }
+    openTooltip(trigger);
+    pinnedByTouch = activeTrigger === trigger;
+    window.setTimeout(() => {
+      if (activeTrigger === trigger && !trigger.isConnected) {
+        closeTooltip(false);
+      }
+    }, 0);
+  };
+  const handleLeave = (event) => {
+    if (pinnedByTouch) {
+      return;
+    }
+    const trigger = getTrigger(event);
+    if (trigger == null || containsTarget(trigger, event.relatedTarget)) {
+      return;
+    }
+    if (activeTrigger === trigger || pendingTrigger === trigger) {
+      closeTooltip();
+    }
+  };
+  const handleFocusIn = (event) => {
+    const trigger = getTrigger(event);
+    if (trigger?.matches(":focus-visible")) {
+      requestOpen(trigger, true);
+    }
+  };
+  const handleKeyDown = (event) => {
+    if (event.key === "Escape") {
+      closeTooltip();
+    }
+  };
+  const handleContextMenu = (event) => {
+    lastPointerWasTouch = false;
+    const trigger = getTrigger(event);
+    if (activeTrigger === trigger || pendingTrigger === trigger) {
+      closeTooltip();
+    }
+  };
+  const handlers = {
+    pointerover: handlePointerOpen,
+    pointerdown: handlePointer,
+    pointercancel: handlePointer,
+    click: handleTouchClick,
+    pointerout: handleLeave,
+    focusin: handleFocusIn,
+    focusout: handleLeave,
+    keydown: handleKeyDown,
+    contextmenu: handleContextMenu,
+  };
+  const roots = new Map();
+  const handledEvents = new WeakSet();
+  const handleEvent = (event) => {
+    if (handledEvents.has(event)) return;
+    handledEvents.add(event);
+    handlers[event.type](event);
+  };
+  const discoverRoots = (node) => {
+    if (node.shadowRoot) listen(node.shadowRoot);
+    for (const element of node.querySelectorAll("*")) {
+      if (element.shadowRoot) listen(element.shadowRoot);
+    }
+  };
+  const listen = (root) => {
+    if (roots.has(root)) return;
+    for (const type of Object.keys(handlers)) root.addEventListener(type, handleEvent);
+    const observer = new window.MutationObserver((records) => {
+      for (const { addedNodes } of records) {
+        for (const node of addedNodes) {
+          if (node.nodeType === Node.ELEMENT_NODE) discoverRoots(node);
+        }
+      }
+      for (const [root, cleanup] of roots) {
+        if (root.host && !root.host.isConnected) {
+          cleanup();
+          roots.delete(root);
+        }
+      }
+      if (activeTrigger && !activeTrigger.isConnected) closeTooltip(false);
+    });
+    observer.observe(root, { childList: true, subtree: true });
+    roots.set(root, () => {
+      observer.disconnect();
+      for (const type of Object.keys(handlers)) root.removeEventListener(type, handleEvent);
+    });
+    discoverRoots(root);
+  };
+  const destroy = () => {
+    closeTooltip(false);
+    lastPointerWasTouch = false;
+    for (const cleanup of roots.values()) cleanup();
+    roots.clear();
+    tooltip = null;
+  };
+
+  // Events between children of one shadow root never reach the document.
+  listen(document);
+  window.addEventListener("pagehide", destroy, { once: true });
+})();
+</script>
+<script id="codex-visualization-tabs">
+(() => {
+  const selector = '.nav[role="tablist"] [role="tab"]';
+  const disabled = ':disabled,[aria-disabled="true"]';
+  const selectTab = (selected) => {
+    const panelId = selected.getAttribute("aria-controls");
+    for (const tab of selected.closest('[role="tablist"]').querySelectorAll('[role="tab"]')) {
+      const active = tab === selected;
+      tab.classList.toggle("active", active);
+      tab.setAttribute("aria-selected", String(active));
+      const id = tab.getAttribute("aria-controls");
+      const panel = id && document.getElementById(id);
+      if (panel != null) {
+        panel.hidden = id !== panelId;
+        if (!panel.hidden && selected.id) {
+          panel.setAttribute("aria-labelledby", selected.id);
+        }
+      }
+    }
+  };
+  const interact = (event) => {
+    const tab = event.target?.closest?.(selector);
+    if (event.defaultPrevented || tab == null || tab.matches(disabled)) {
+      return;
+    }
+    if (event.type === "click") {
+      selectTab(tab);
+      return;
+    }
+    const tabs = Array.from(
+      tab.closest('[role="tablist"]').querySelectorAll('[role="tab"]'),
+    ).filter((candidate) => !candidate.matches(disabled));
+    const current = tabs.indexOf(tab);
+    let next;
+    if (event.key === "ArrowRight" || event.key === "ArrowDown") {
+      next = (current + 1) % tabs.length;
+    } else if (event.key === "ArrowLeft" || event.key === "ArrowUp") {
+      next = (current + tabs.length - 1) % tabs.length;
+    } else if (event.key === "Home") {
+      next = 0;
+    } else if (event.key === "End") {
+      next = tabs.length - 1;
+    } else {
+      return;
+    }
+    event.preventDefault();
+    tabs[next].focus();
+    selectTab(tabs[next]);
+  };
+
+  for (const list of document.querySelectorAll('.nav[role="tablist"]')) {
+    const selected =
+      list.querySelector('[role="tab"][aria-selected="true"]') ??
+      list.querySelector('[role="tab"].active') ??
+      list.querySelector('[role="tab"]');
+    if (selected != null) {
+      selectTab(selected);
+    }
+  }
+  document.addEventListener("click", interact);
+  document.addEventListener("keydown", interact);
+  window.addEventListener("pagehide", () => {
+    document.removeEventListener("click", interact);
+    document.removeEventListener("keydown", interact);
+  }, { once: true });
+})();
+</script>
+<script id="codex-visualization-carousel">
+  (() => {
+    for (const root of document.querySelectorAll(".viz-carousel")) {
+      const panels = Array.from(
+        root.querySelectorAll(":scope > [data-variant]"),
+      );
+      if (panels.length === 0) {
+        continue;
+      }
+      root.setAttribute("role", "group");
+      panels.forEach((panel, index) => {
+        panel.hidden = index !== 0;
+        panel.setAttribute("role", "group");
+        if (!panel.hasAttribute("aria-label")) {
+          panel.setAttribute("aria-label", panel.dataset.variant);
+        }
+      });
+      root.dataset.activeVariant = panels[0].dataset.variant;
+      if (panels.length === 1) {
+        continue;
+      }
+
+      const controls = document.createElement("div");
+      controls.className = "viz-carousel-controls";
+      // Portable copy of the settings dropdown's legacy glyph; no 14px icon-package preset matches it.
+      // https://github.com/openai/openai/blob/master/codex/codex-apps/webview/src/icons/chevron.svg
+      controls.innerHTML = `
+      <button type="button" class="viz-carousel-previous cursor-interaction"><i data-lucide="chevron-left" aria-hidden="true"></i></button>
+      <details class="viz-carousel-picker">
+        <summary class="cursor-interaction">
+          <span class="viz-carousel-count tabular-nums"></span>
+          <span class="viz-carousel-name"></span>
+          <svg class="viz-carousel-caret" width="14" height="14" viewBox="0 0 20 21" fill="none" aria-hidden="true" focusable="false">
+            <path d="M15.2793 7.71101C15.539 7.45131 15.961 7.45131 16.2207 7.71101C16.4804 7.97071 16.4804 8.39272 16.2207 8.65242L10.4707 14.4024C10.211 14.6621 9.78902 14.6621 9.52932 14.4024L3.77932 8.65242L3.69436 8.54792C3.52385 8.28979 3.55205 7.93828 3.77932 7.71101C4.00659 7.48374 4.3581 7.45554 4.61623 7.62605L4.72073 7.71101L10 12.9903L15.2793 7.71101Z" fill="currentColor" stroke="currentColor" stroke-width="0.6" />
+          </svg>
+        </summary>
+        <div class="viz-carousel-options"></div>
+      </details>
+      <button type="button" class="viz-carousel-next cursor-interaction"><i data-lucide="chevron-right" aria-hidden="true"></i></button>`;
+      const previous = controls.querySelector(".viz-carousel-previous");
+      const next = controls.querySelector(".viz-carousel-next");
+      const picker = controls.querySelector(".viz-carousel-picker");
+      const summary = picker.querySelector("summary");
+      const count = controls.querySelector(".viz-carousel-count");
+      const name = controls.querySelector(".viz-carousel-name");
+      const options = controls.querySelector(".viz-carousel-options");
+      const status = document.createElement("span");
+      status.className = "sr-only";
+      status.setAttribute("role", "status");
+      status.setAttribute("aria-live", "polite");
+      status.setAttribute("aria-atomic", "true");
+      previous.setAttribute(
+        "aria-label",
+        root.dataset.previousLabel ?? "Previous variant",
+      );
+      next.setAttribute("aria-label", root.dataset.nextLabel ?? "Next variant");
+
+      let active = 0;
+      let mousePointerId = null;
+      let summaryPointerHandled = false;
+      summary.addEventListener("pointerdown", (event) => {
+        summaryPointerHandled =
+          event.pointerType === "mouse" && event.button === 0 && !event.ctrlKey;
+        if (!summaryPointerHandled) {
+          return;
+        }
+        event.preventDefault();
+        summary.focus({ preventScroll: true });
+        picker.open = !picker.open;
+        mousePointerId = picker.open ? event.pointerId : null;
+      });
+      summary.addEventListener("click", (event) => {
+        if (summaryPointerHandled && event.detail > 0) {
+          event.preventDefault();
+        }
+      });
+      const choices = panels.map((panel, index) => {
+        const choice = document.createElement("button");
+        choice.type = "button";
+        choice.className = "cursor-interaction";
+        choice.textContent = panel.dataset.variant;
+        choice.addEventListener("click", () => {
+          select(index);
+          summary.focus();
+        });
+        choice.addEventListener("pointerup", (event) => {
+          if (
+            picker.open &&
+            event.pointerType === "mouse" &&
+            event.button === 0 &&
+            event.pointerId === mousePointerId
+          ) {
+            choice.click();
+          }
+        });
+        options.appendChild(choice);
+        return choice;
+      });
+      const select = (index) => {
+        const changed = active !== index;
+        active = index;
+        panels.forEach((panel, position) => {
+          panel.hidden = position !== active;
+          choices[position].setAttribute(
+            "aria-current",
+            String(position === active),
+          );
+        });
+        root.dataset.activeVariant = panels[active].dataset.variant;
+        count.textContent = `${active + 1} / ${panels.length}`;
+        name.textContent = panels[active].dataset.variant;
+        picker.open = false;
+        mousePointerId = null;
+        if (changed) {
+          status.textContent = `${count.textContent}: ${name.textContent}`;
+        }
+      };
+      previous.addEventListener("click", () =>
+        select((active + panels.length - 1) % panels.length),
+      );
+      next.addEventListener("click", () =>
+        select((active + 1) % panels.length),
+      );
+      picker.addEventListener("keydown", (event) => {
+        if (event.key === "Escape" && picker.open) {
+          event.preventDefault();
+          picker.open = false;
+          mousePointerId = null;
+          summary.focus();
+          return;
+        }
+        if (event.altKey || event.ctrlKey || event.metaKey) {
+          return;
+        }
+        const index = choices.indexOf(document.activeElement);
+        let nextIndex;
+        if (event.key === "ArrowDown") {
+          nextIndex = index < 0 ? active : (index + 1) % choices.length;
+        } else if (event.key === "ArrowUp") {
+          nextIndex = index < 0 ? active : (index + choices.length - 1) % choices.length;
+        } else if (picker.open && event.key === "Home") {
+          nextIndex = 0;
+        } else if (picker.open && event.key === "End") {
+          nextIndex = choices.length - 1;
+        } else {
+          return;
+        }
+        event.preventDefault();
+        picker.open = true;
+        choices[nextIndex].focus();
+      });
+      picker.addEventListener("focusout", (event) => {
+        if (!picker.contains(event.relatedTarget)) {
+          picker.open = false;
+          mousePointerId = null;
+        }
+      });
+      const dismiss = (event) => {
+        if (!summary.contains(event.target)) {
+          mousePointerId = null;
+        }
+        if (!picker.contains(event.target)) {
+          picker.open = false;
+        }
+      };
+      const endPointerSelection = () => {
+        mousePointerId = null;
+      };
+      const sizePicker = () => {
+        root.style.setProperty(
+          "--viz-carousel-picker-height",
+          `${picker.open ? options.offsetHeight : 0}px`,
+        );
+      };
+      picker.addEventListener("toggle", sizePicker);
+      window.addEventListener("resize", sizePicker);
+      document.addEventListener("pointerdown", dismiss);
+      document.addEventListener("pointerup", endPointerSelection);
+      document.addEventListener("pointercancel", endPointerSelection);
+      window.addEventListener("blur", endPointerSelection);
+      window.addEventListener(
+        "pagehide",
+        () => {
+          document.removeEventListener("pointerdown", dismiss);
+          document.removeEventListener("pointerup", endPointerSelection);
+          document.removeEventListener("pointercancel", endPointerSelection);
+          window.removeEventListener("blur", endPointerSelection);
+          window.removeEventListener("resize", sizePicker);
+        },
+        { once: true },
+      );
+      root.append(controls, status);
+      select(0);
+    }
+  })();
+</script>
+<script id="codex-visualization-lucide" async="" src="https://unpkg.com/lucide@1.17.0/dist/umd/lucide.js"></script>
+<script>
+(() => {
+  const initialize = () => {
+    globalThis.lucide?.createIcons({ attrs: { width: 16, height: 16 } });
+  };
+  if (globalThis.lucide != null) {
+    initialize();
+    return;
+  }
+  document
+    .getElementById("codex-visualization-lucide")
+    ?.addEventListener("load", initialize, { once: true });
+})();
+</script>
+</body></html>
