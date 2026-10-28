@@ -393,15 +393,31 @@ footer {
   maxlength="10"
   pattern="05[0-9]{8}"
   title="יש להזין מספר נייד ישראלי בן 10 ספרות המתחיל ב־05"
+  aria-describedby="phoneError"
   oninput="
     this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10);
-    this.setCustomValidity('');
+    document.getElementById('phoneError').hidden =
+      !(this.value.length === 10 && !this.validity.valid);
+  "
+  onblur="
+    document.getElementById('phoneError').hidden =
+      this.validity.valid;
   "
   oninvalid="
-    this.setCustomValidity('יש להזין מספר נייד ישראלי תקין: 10 ספרות המתחילות ב־05');
+    document.getElementById('phoneError').hidden = false;
   "
   required
 >
+
+<p
+  id="phoneError"
+  role="alert"
+  hidden
+  style="color:#c62828; font-size:13px; margin-top:-12px; margin-bottom:16px;"
+>
+  יש להזין מספר נייד ישראלי תקין — 10 ספרות המתחילות ב־05.
+</p>
+
 
 
           <button
